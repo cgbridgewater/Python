@@ -38,3 +38,29 @@ print(type(new_person))		# output: <class 'dict'>
 print(len(new_person))		# output: 4 (the number of key-value pairs)
 print(len('Coding Dojo'))	# output: 11 
 
+
+
+float = 3.14
+
+number = 4
+
+sum = number + int(float)
+print(type (sum), sum)
+
+print(type(24))
+print(type(3.9))
+print(type(3j))
+
+
+# int_to_float = float(35)
+float_to_int = int(44.2)
+int_to_complex = complex(35)
+# print(int_to_float)
+print(float_to_int)
+print(int_to_complex)
+# print(type(int_to_float))
+print(type(float_to_int))
+print(type(int_to_complex))
+
+import random
+print(random.randint(2,50)) # provides a random number between 2 and 50
