@@ -81,7 +81,7 @@ user_val = "26"
 total = total + int(user_val)
 # total will be 61
 
-# print("Hello " + 42)
+print("Hello " , 42)
 # output: TypeError
 print("Hello " + str(42))
 # output: Hello 42
