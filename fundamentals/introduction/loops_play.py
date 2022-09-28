@@ -124,7 +124,11 @@ while y > 0:
     y = y - 1
 else:
     print("Final else statement")
-
+# # output
+# 3
+# 2
+# 1
+# Final else statement
 
 
 # loop break example
