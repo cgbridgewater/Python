@@ -1,5 +1,8 @@
 # list examples
 # from this import d
+from audioop import reverse
+
+
 ninjas = ['Rozen', 'KB', 'Oliver']
 my_list = ['4', ['list', 'in', 'a', 'list'], 987]
 empty_list = []
@@ -73,3 +76,41 @@ print(words) # prints ['start', 'going', 'till', 'the', 'end']
 
 print('playing here')
 print(words[2:5])
+
+my_list = [1, 'Zen', 'hi']
+print(len(my_list))
+# output
+3
+
+my_list = [1,5,2,8,4]
+my_list.pop()
+print(my_list)
+# output:
+# [1,5,2,8]
+
+# common list methods
+my_list = [1,51,22,18,34]
+print(sorted(my_list))
+my_list.reverse()
+print(my_list)
+my_list.sort()
+print(my_list)
+
+
+
+# playground practice#
+some_nums = [44,56,2,3,12,19,6]
+print("Get started by writing your own code!")
+print("origional numbers = ", some_nums)
+# Some optional challenges to assess and refine your understanding:
+
+print(len(some_nums))
+# Print the length of the list.
+print(sorted(some_nums))
+# Use antoher python built-in function and print the result.
+some_nums.pop()
+print(some_nums)
+# Remove an item from the list. Remember to verify that it was removed.
+some_nums.reverse()
+print(some_nums)
+# Utilize a method from the documentation and print the result.
