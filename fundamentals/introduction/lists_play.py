@@ -1,7 +1,5 @@
 # list examples
-from this import d
-
-
+# from this import d
 ninjas = ['Rozen', 'KB', 'Oliver']
 my_list = ['4', ['list', 'in', 'a', 'list'], 987]
 empty_list = []
@@ -58,4 +56,20 @@ nums = [1,2,3,4,5]
 nums.append(99)
 print(nums)
 #the output would be [1,2,3,4,5,99]
+nums.append(102)
+print(nums)
 
+words = ["start","going","till","the","end"]
+# Sub-ranges (portions) of the list
+print(words[1:]) # prints ['going', 'till', 'the', 'end']
+print(words[:4]) # prints ['start', 'going', 'till', 'the']
+print(words[2:4]) # prints ['till', 'the']
+    
+# Making a copy of a list
+copy_of_words = words[:]
+copy_of_words.append("dojo") # only appends to the copy
+print(copy_of_words) # prints ['start', 'going', 'till', 'the', 'end', 'dojo']
+print(words) # prints ['start', 'going', 'till', 'the', 'end']
+
+print('playing here')
+print(words[2:5])
