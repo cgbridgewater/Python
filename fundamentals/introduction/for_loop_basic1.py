@@ -1,7 +1,5 @@
 # 1 - Basic - Print all integers from 0 to 150.
 
-import numbers
-
 
 for INTEGER in range(151):
     print(INTEGER)
@@ -30,8 +28,15 @@ print(" ")
 print(" ")
 # 4 - Whoa. That Sucker's Huge - Add odd integers from 0 to 500,000, and print the final sum.
 
-sum_of_numbers = sum(range(1,500001))
+sum_of_numbers = sum(range(1,500001,2))
 print(sum_of_numbers)
+
+# or this to show each add up to the final number
+sum = 0
+for i in range(1,500001,2):
+    sum+= i
+    print(sum)
+
 
 print(" ")
 print(" ")
@@ -51,5 +56,3 @@ mult = 3
 for flexCounter in range(lowNum,highNum+1):
     if flexCounter % mult ==0:
         print(flexCounter)
-        continue
-    else: continue
