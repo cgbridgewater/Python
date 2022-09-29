@@ -9,7 +9,7 @@ def countdown(num):
     print(f"length: {len(output)}")
     return output
 
-
+countdown(5)
 
 num = 5
 
