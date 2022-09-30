@@ -110,5 +110,7 @@ resumes = [
 ]
 
 #    (variable[dict]["list"][location])
+
 print(resumes[1]["hobbies"][0:2])
+
 

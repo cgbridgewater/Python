@@ -83,7 +83,7 @@ countries = ["Uganda", "Chile", "Albania", "Saudi Arabia"]
 
 # Challenge 1: Fix the range!
 for integer in range(0, len(countries)):
-    print(integer)    # Challenge 2: print the index here
+    #print(integer)    # Challenge 2: print the index here
     print(integer, countries[integer])   # Challenge 3: print the country here
 
 
