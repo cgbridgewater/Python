@@ -95,20 +95,20 @@ resumes = [
     {#dictionary 1
         "skills" : ["front-end", "back-end", "database"],#list 1
         "languages" : ["Python", "Javascript"],#list 2
-        "hobbiees" : ["rock climbing", "knitting"]#list 3
+        "hobbies" : ["rock climbing", "knitting"]#list 3
     },
     {#dictionary 2
         "skills" : ["front-end", "back-end", "database"],#list 1
         "languages" : ["Python", "Javascript"],#list 2
-        "hobbiees" : ["rock climbing", "knitting"]#list 3
+        "hobbies" : ["rock climbing", "knitting"]#list 3
     },
     {#dictionary 3
         "skills" : ["front-end", "back-end", "database"],#list 1
         "languages" : ["Python", "Javascript"],#list 2
-        "hobbiees" : ["rock climbing", "knitting"]#list 3
+        "hobbies" : ["rock climbing", "knitting"]#list 3
     },
 ]
 
 #    (variable[dict]["list"][location])
-print(resumes[1]["languages"][0])
+print(resumes[1]["hobbies"][0:2])
 

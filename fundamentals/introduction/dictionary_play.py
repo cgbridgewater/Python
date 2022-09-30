@@ -1,7 +1,4 @@
 #literal notation
-from optparse import Values
-from tkinter import N
-from tkinter.messagebox import NO
 
 
 person = {"first": "Ada", "last": "Lovelace", "age": 42, "is_organ_donor": True}
@@ -78,6 +75,10 @@ if "email" not in person_3:
 else:
     print("Would you like to replace your existing email?")
 
+
+
+
+person_3 = {"first": "Ada", "last": "Lovelace", "age": 42, "is_organ_donor": True}
 
 # ACCESSING VALUES #
 print(person_3["first"])
