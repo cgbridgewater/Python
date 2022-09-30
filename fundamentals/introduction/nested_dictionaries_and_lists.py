@@ -89,41 +89,15 @@ print("#4-------------------------#4")
 #4Iterate Through a Dictionary with List Values
 # Create a function printInfo(some_dict) that given a dictionary whose values are all lists, prints the name of each key along with the size of its list, and then prints the associated values within each key's list. For example:
 dojo = {
-   'locations': ['San Jose', 'Seattle', 'Dallas', 'Chicago', 'Tulsa', 'DC', 'Burbank'],
-   'instructors': ['Michael', 'Amy', 'Eduardo', 'Josh', 'Graham', 'Patrick', 'Minh', 'Devon']
+    'locations': ['San Jose', 'Seattle', 'Dallas', 'Chicago', 'Tulsa', 'DC', 'Burbank'],
+    'instructors': ['Michael', 'Amy', 'Eduardo', 'Josh', 'Graham', 'Patrick', 'Minh', 'Devon']
 }
 
+def printInfo(some_dict):
+    for each_key,values in some_dict.items():
+            print(f"{len(values)}", each_key.upper())
+            for v in values:
+                    print(v)
+            print('')
 
-print(dojo["locations"])
-
-print(dojo["instructors"])
-
-# printInfo(dojo)
-# # output:
-# 7 LOCATIONS
-# San Jose
-# Seattle
-# Dallas
-# Chicago
-# Tulsa
-# DC
-# Burbank
-    
-# 8 INSTRUCTORS
-# Michael
-# Amy
-# Eduardo
-# Josh
-# Graham
-# Patrick
-# Minh
-# Devon
-
-
-
-#need---   length of list
-#need---   location title (IN CAPS)
-#need---   print dictionary values out under the title/length count
-
-
-# printInfo(some_dict)
+printInfo(dojo)
