@@ -1,5 +1,3 @@
-from re import T
-
 
 class Shoe:
     def __init__(self):
