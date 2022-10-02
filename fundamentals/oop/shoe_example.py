@@ -61,3 +61,4 @@ golf_shoe = Shoe("Nike Golf", "Boa Golf Cleat", 129.99)
 print(golf_shoe.type)
 golf_shoe.in_stock = False
 print(golf_shoe.in_stock)
+
