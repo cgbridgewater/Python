@@ -49,6 +49,24 @@ class Shoe:
         self.price = price
         #the stock status is default set to True
         self.in_stock = True
+
+
+        #### methods###
+    def on_sale_by_percent(self,percent_off):
+        self.price = self.price * (1- percent_off)
+
+    def total_with_tax(self, tax_rate):
+        tax = self.price * tax_rate
+        total = self.price + tax
+        return total
+
+    def cut_price_by(self, amount):
+        if amount < self.price:
+            self.price -= amount
+        else:
+            print("Price deduction too large.")
+
+
 skater_shoe = Shoe("Vans", "Low Top Trainer", 59.99)
 dress_shoe = Shoe("Jack and Jill Bootery", "Ballet Flats", 29.99)
 
@@ -61,4 +79,12 @@ golf_shoe = Shoe("Nike Golf", "Boa Golf Cleat", 129.99)
 print(golf_shoe.type)
 golf_shoe.in_stock = False
 print(golf_shoe.in_stock)
+
+print(golf_shoe.price)
+golf_shoe.on_sale_by_percent(.2)
+print(golf_shoe.price)
+
+print(dress_shoe.price)
+dress_shoe.cut_price_by(10.)
+print(dress_shoe.price)
 

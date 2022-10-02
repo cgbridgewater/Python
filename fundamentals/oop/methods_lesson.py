@@ -1,3 +1,5 @@
+###### Methods
+
 class User:
     def __init__(self,first_name,last_name,age, email):
         self.firt_name = first_name
@@ -19,3 +21,8 @@ sadie = User("Sadie", "Flick", 35, "sflick@codingdojo.com")
 sadie.greeting()
 adrien.greeting()
 chris.greeting()
+
+
+
+###### Methods and Updating Attributes
+
