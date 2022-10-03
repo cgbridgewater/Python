@@ -1,0 +1,76 @@
+
+class BankAccount:
+    accounts = []
+    def __init__(self, int_rate, balance): 
+        self.int_rate = int_rate
+        self.balance = balance
+        BankAccount.accounts.append(self)
+
+
+#tested and working
+    def account_info(self):
+        print(f"Your account balance is ${self.balance} with an interest rate of {self.int_rate}%")
+        return self
+
+
+#tested and working
+    def deposit(self, amount):
+        self.balance += amount
+        print(f"You deposited ${amount}, your new balance is ${self.balance}")
+        return self
+
+#tested and working
+    def yield_interest(self):
+        temp = self.balance
+        if self.balance > 0:    
+            interest = self.balance * 1 + self.int_rate - temp
+            print(f"Your interest is ${interest}")
+        return self
+
+
+#tested and working
+    def with_draw(self,amount):
+        # we can use the static method here to evaluate
+        # if we can with draw the funds without going negative
+        if BankAccount.can_withdraw(self.balance,amount):
+            temp = self.balance
+            self.balance -= amount
+            print(f"You withdrew ${amount} from ${temp} your new balance is ${self.balance}")
+        else:
+            temp = self.balance
+            self.balance -= 5 #fee for insufficient funds
+            print(f"Insufficient Funds. You cannot withdraw ${amount} from ${temp}  A $5 fee will be applied")
+            print(f"Your balance is now ${self.balance}")
+        return self
+
+#tested and working
+    @staticmethod
+    def can_withdraw(balance,amount):
+        if (balance - amount) < 0:
+            return False
+        else:
+            return True
+
+    @classmethod
+    def print_all_accounts(cls):
+        for account in cls.accounts:
+            account.account_info()
+
+
+
+class User:
+    population = 0
+
+    def __init__(self, first_name, last_name, age):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.age = age
+        self.savings = BankAccount(.4, 5000)
+        User.population += 1
+
+    def greeting(self):
+        print(f"Hello, My name is{self.first_name}!")
+
+
+
+
