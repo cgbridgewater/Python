@@ -24,6 +24,7 @@ class BankAccount:
         # we use cls to refer to the class
         for account in cls.all_accounts:
             sum += account.balance
+            print(sum)
         return sum
 
 #changing them on an instance
@@ -47,3 +48,4 @@ print(sadiesAccount.bank_name)
 # output: Bank of Dojo
 
 print(sadiesAccount.balance)
+
