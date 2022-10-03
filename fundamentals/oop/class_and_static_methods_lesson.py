@@ -28,7 +28,7 @@ class BankAccount:
 
 #changing them on an instance
 adriensAccount = BankAccount(3, 3000)
-sadiesAccount = BankAccount(2.5, 5000)
+sadiesAccount = BankAccount(2.5,50000)
 adriensAccount.bank_name = "Dojo Credit Union"
     
 print(adriensAccount.bank_name)
@@ -45,3 +45,5 @@ print(adriensAccount.bank_name)
     
 print(sadiesAccount.bank_name)
 # output: Bank of Dojo
+
+print(sadiesAccount.balance)
