@@ -1,15 +1,10 @@
 
 class BankAccount:
-    # don't forget to add some default values for these parameters!
-    all_accounts = []
-
+    accounts = []
     def __init__(self, int_rate, balance): 
         self.int_rate = int_rate
         self.balance = balance
-        BankAccount.all_accounts.append(self)
-        # your code here! (remember, instance attributes go here)
-        # don't worry about user info here; we'll involve the User class soon
-
+        BankAccount.accounts.append(self)
 
 
 #tested and working
@@ -24,10 +19,12 @@ class BankAccount:
         print(f"You deposited ${amount}, your new balance is ${self.balance}")
         return self
 
+#tested and working
     def yield_interest(self):
         temp = self.balance
-        interest = self.balance * 1 + self.int_rate - temp
-        print(f"Your interest is ${interest}")
+        if self.balance > 0:    
+            interest = self.balance * 1 + self.int_rate - temp
+            print(f"Your interest is ${interest}")
         return self
 
 
@@ -54,6 +51,10 @@ class BankAccount:
         else:
             return True
 
+    @classmethod
+    def print_all_accounts(cls):
+        for account in cls.accounts:
+            account.account_info()
 
 
 
@@ -61,33 +62,35 @@ class BankAccount:
 
 
 # create account
-mikes_account = BankAccount(2 , 800)
-toms_account = BankAccount(3 , 5000)
+mikes_bank = BankAccount(2 , 800)
+toms_bank = BankAccount(3 , 5000)
 
 
 print("------check withdraw function-------")
-toms_account.with_draw(4900) 
+toms_bank.with_draw(4900) 
 print("------check overdraft function------")
-toms_account.with_draw(150)
+toms_bank.with_draw(150)
 
 
 print("-------test second account withdraw and deposit--------")
-mikes_account.with_draw(2)
+mikes_bank.with_draw(2)
 
-mikes_account.deposit(500)
+mikes_bank.deposit(500)
 
 
 print("------toms acct info------")
-toms_account.account_info()
+toms_bank.account_info()
 
 print("-----toms 'yield' ------") 
-toms_account.yield_interest()
+toms_bank.yield_interest()
 
 
 print("------test mikes account chaining------")
-mikes_account.account_info().deposit(400).deposit(300).deposit(1000).with_draw(1500).yield_interest().account_info() 
+mikes_bank.account_info().deposit(400).deposit(300).deposit(1000).with_draw(1500).yield_interest().account_info() 
 
 print("------test toms account chaining-------")
-toms_account.deposit(4245).deposit(7654).with_draw(234).with_draw(34).with_draw(764).with_draw(908).yield_interest().account_info()
+toms_bank.deposit(4245).deposit(7654).with_draw(234).with_draw(34).with_draw(764).with_draw(908).yield_interest().account_info()
 
 
+print("--------all accounts------")
+BankAccount.print_all_accounts()
