@@ -9,14 +9,14 @@ class BankAccount:
 
 #tested and working
     def account_info(self):
-        print(f"Your account balance is ${self.balance} with an interest rate of {self.int_rate}%")
+        print(f"Your current account balance is ${self.balance} with an interest rate of {self.int_rate}%")
         return self
 
 
 #tested and working
     def deposit(self, amount):
         self.balance += amount
-        print(f"You deposited ${amount}, your new balance is ${self.balance}")
+        print(f"You have deposited ${amount}")
         return self
 
 #tested and working
@@ -35,12 +35,11 @@ class BankAccount:
         if BankAccount.can_withdraw(self.balance,amount):
             temp = self.balance
             self.balance -= amount
-            print(f"You withdrew ${amount} from ${temp} your new balance is ${self.balance}")
+            print(f"You withdrew ${amount}")
         else:
             temp = self.balance
             self.balance -= 5 #fee for insufficient funds
             print(f"Insufficient Funds. You cannot withdraw ${amount} from ${temp}  A $5 fee will be applied")
-            print(f"Your balance is now ${self.balance}")
         return self
 
 #tested and working
@@ -65,12 +64,26 @@ class User:
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
-        self.savings = BankAccount(.4, 5000)
+        self.savings = BankAccount(.2, 0)
         User.population += 1
 
     def greeting(self):
-        print(f"Hello, My name is{self.first_name}!")
+        print(f"Hello, My name is {self.first_name}!")
 
+    def make_deposite(self,amount):
+        self.savings.deposit(amount)
 
+    def make_withdrawal(self,amount):
+        self.savings.with_draw(amount)
 
+    
 
+    def check_balance(self):
+        print(f"Your account balance is ${self.savings.balance}")
+
+mike = User("Mike","Jordon",45)
+
+mike.greeting()
+mike.check_balance()
+mike.make_deposite(500)
+mike.check_balance()
