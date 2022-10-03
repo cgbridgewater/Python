@@ -1,15 +1,15 @@
-
-class BankAccount:
+#CHECKING ACCOUNT
+class BankAccount_Checking:
     accounts = []
     def __init__(self, int_rate, balance): 
         self.int_rate = int_rate
         self.balance = balance
-        BankAccount.accounts.append(self)
-
+        BankAccount_Checking.accounts.append(self)
 
 #tested and working
     def account_info(self):
-        print(f"Your current account balance is ${self.balance} with an interest rate of {self.int_rate}%")
+        print(f"Your Checking Account balance is ${self.balance}")
+        print(f"Your Savings Account balance is ${self.savings.balance} with an interest rate of {self.savings.int_rate}%")
         return self
 
 
@@ -32,7 +32,7 @@ class BankAccount:
     def with_draw(self,amount):
         # we can use the static method here to evaluate
         # if we can with draw the funds without going negative
-        if BankAccount.can_withdraw(self.balance,amount):
+        if BankAccount_Checking.can_withdraw(self.balance,amount):
             temp = self.balance
             self.balance -= amount
             print(f"You withdrew ${amount}")
@@ -50,12 +50,78 @@ class BankAccount:
         else:
             return True
 
+
     @classmethod
     def print_all_accounts(cls):
         for account in cls.accounts:
             account.account_info()
 
 
+#END CHECKING ACOUNT
+
+
+
+
+#SAVINGS ACCOUNT
+class BankAccount_Savings:
+    accounts = []
+    def __init__(self, int_rate, balance): 
+        self.int_rate = int_rate
+        self.balance = balance
+        BankAccount_Savings.accounts.append(self)
+
+#tested and working
+    def account_info(self):
+        print(f"Your Checking Account balance is ${self.balance} with an interest rate of {self.int_rate}%")
+        return self
+
+#tested and working
+    def deposit(self, amount):
+        self.balance += amount
+        print(f"You have deposited ${amount}")
+        return self
+
+#tested and working
+    def yield_interest(self):
+        temp = self.balance
+        if self.balance > 0:    
+            interest = self.balance * 1 + self.int_rate - temp
+            print(f"Your interest is ${interest}")
+        return self
+
+#tested and working
+    def with_draw(self,amount):
+        # we can use the static method here to evaluate
+        # if we can with draw the funds without going negative
+        if BankAccount_Savings.can_withdraw(self.balance,amount):
+            temp = self.balance
+            self.balance -= amount
+            print(f"You withdrew ${amount}")
+        else:
+            temp = self.balance
+            self.balance -= 5 #fee for insufficient funds
+            print(f"Insufficient Funds. You cannot withdraw ${amount} from ${temp}  A $5 fee will be applied")
+        return self
+
+#tested and working
+    @staticmethod
+    def can_withdraw(balance,amount):
+        if (balance - amount) < 0:
+            return False
+        else:
+            return True
+
+#END SAVINGS ACCOUNT
+
+
+    @classmethod
+    def print_all_accounts(cls):
+        for account in cls.accounts:
+            account.account_info()
+
+
+
+#USER INFO
 
 class User:
     population = 0
@@ -64,26 +130,60 @@ class User:
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
-        self.savings = BankAccount(.2, 0)
+        self.checking = BankAccount_Checking(.2, 0)
+        self.savings = BankAccount_Savings(.2, 0)
         User.population += 1
 
     def greeting(self):
         print(f"Hello, My name is {self.first_name}!")
 
-    def make_deposite(self,amount):
+#MAKE TRANSFER
+    # def transfer_to_checking(self, amount):
+    #     if self.savings.with_draw(amount):
+        
+    #         self.checking.deposit(amount)
+
+#MAKE DEPOSITS
+    def savings_deposite(self,amount):
         self.savings.deposit(amount)
+    def checking_deposite(self,amount):
+        self.checking.deposit(amount)
 
-    def make_withdrawal(self,amount):
+#MAKE WITHDRAWALS
+    def savings_withdrawal(self,amount):
         self.savings.with_draw(amount)
+    def checking_withdrawal(self,amount):
+        self.checking.with_draw(amount)
 
-    
-
-    def check_balance(self):
-        print(f"Your account balance is ${self.savings.balance}")
+#CHECK BALANCE
+    def check_balances(self):
+        print(f"Your Checking Account balance is ${self.checking.balance}")
+        print(f"Your Savings Account balance is ${self.savings.balance}")
 
 mike = User("Mike","Jordon",45)
 
+print("---------------greating test")
 mike.greeting()
-mike.check_balance()
-mike.make_deposite(500)
-mike.check_balance()
+
+
+print("---------------balance test")
+mike.check_balances()
+
+
+print("---------------deposite test")
+mike.checking_deposite(500)
+mike.savings_deposite(300)
+
+
+print("---------------withdraw test")
+mike.checking_withdrawal(126)
+mike.savings_withdrawal(205)
+
+
+
+
+
+
+print("--------all accounts------")
+mike.check_balances()
+
