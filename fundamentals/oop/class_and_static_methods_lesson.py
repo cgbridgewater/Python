@@ -1,24 +1,4 @@
 
-# #changing them on an instance
-# adriensAccount = BankAccount()
-# sadiesAccount = BankAccount()
-# adriensAccount.bank_name = "Dojo Credit Union"
-    
-# print(adriensAccount.bank_name)
-# # output: Dojo Credit Union
-    
-# print(sadiesAccount.bank_name)
-# # output: First National Dojo
-
-# #changing them on the entire class
-# BankAccount.bank_name = "Bank of Dojo"
-    
-# print(adriensAccount.bank_name)
-# # output: Bank of Dojo
-    
-# print(sadiesAccount.bank_name)
-# # output: Bank of Dojo
-
 
 
 
@@ -45,3 +25,23 @@ class BankAccount:
         for account in cls.all_accounts:
             sum += account.balance
         return sum
+
+#changing them on an instance
+adriensAccount = BankAccount(3, 3000)
+sadiesAccount = BankAccount(2.5, 5000)
+adriensAccount.bank_name = "Dojo Credit Union"
+    
+print(adriensAccount.bank_name)
+# output: Dojo Credit Union
+    
+print(sadiesAccount.bank_name)
+# output: First National Dojo
+
+#changing them on the entire class
+BankAccount.bank_name = "Bank of Dojo"
+    
+print(adriensAccount.bank_name)
+# output: Bank of Dojo
+    
+print(sadiesAccount.bank_name)
+# output: Bank of Dojo
