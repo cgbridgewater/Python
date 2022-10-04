@@ -1,64 +1,65 @@
-class Player:
-    def __init__(self, name, age, position, team):
-        self.name = name
-        self.age = age
-        self.position = position
-        self.team = team
+class Players:
+    player_objects = []
+    def __init__(self, data):
+        self.name = data['name']
+        self.age = data['age']
+        self.position = data['position']
+        self.team = data['team']
+    
 
 
+    @classmethod
+    def add_players(cls, data):
+        player_objects = []
+        for dict in data:
+            player_objects.append(cls(dict))
+        return player_objects
+    
+    
+    def __repr__(self):
+        display = f"Player: {self.name}, age: {self.age} , pos: {self.position}, team: {self.team}"
+        return display
 
 
-
-kevin = {"name": "Kevin Durant", "age":34, "position": "small forward", "team": "Brooklyn Nets"}
-
-# Pass in all the values from the dictionary by their keys
-player_kevin = Player(kevin["name"], kevin["age"], kevin["position"], kevin["team"])
-print(player_kevin.position) # prints small forward
-
-
-
-new_lst = []
-for i in lst: # lst is the list that contains the data
-    person = Person(i["Name"], i["Age"], i["Role"])
-    new_lst.append(person)
-
-
-players = [
-    {
+kevin = {
         "name": "Kevin Durant", 
         "age":34, 
         "position": "small forward", 
         "team": "Brooklyn Nets"
-    },
-    {
+}
+jason = {
         "name": "Jason Tatum", 
         "age":24, 
         "position": "small forward", 
         "team": "Boston Celtics"
-    },
-    {
+}
+kyrie = {
         "name": "Kyrie Irving", 
-        "age":32, 
-        "position": "Point Guard", 
+        "age":32, "position": "Point Guard", 
         "team": "Brooklyn Nets"
-    },
-    {
-        "name": "Damian Lillard", 
-        "age":33, 
-        "position": "Point Guard", 
-        "team": "Portland Trailblazers"
-    },
-        {
-        "name": "Joel Embiid", 
-        "age":32, 
-        "position": "Power Foward", 
-        "team": "Philidelphia 76ers"
-    },
-    {
-        "name": "", 
-        "age":16, 
-        "position": "P", 
-        "team": "en"
-    }
-]
+}
+michael = {
+        "name": "Michael Jordan", 
+        "age":55, 
+        "position": "Shooting Guard", 
+        "team": "Chicago Bulls"
+}
+gary = {
+        "name": "Gary Payton", 
+        "age":54, "position": "Point Guard", 
+        "team": "Seattle Sonics"
+}
 
+
+
+
+player_jason = Players(jason)
+player_kevin = Players(kevin)
+player_kyrie = Players(kyrie)
+player_michael = Players(michael)
+player_gary = Players(gary)
+print(player_jason)
+print(player_kevin)
+print(player_kyrie)
+print(player_michael)
+print(player_gary)
