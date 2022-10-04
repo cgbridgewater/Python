@@ -14,8 +14,7 @@ class User:
 {self.last_name}
 {self.email}
 {self.age}
-{self.is_rewards_memeber}
-{self.gold_card_points}''')
+{self.is_rewards_memeber}{self.gold_card_points}''')
 
     #enroll member and turn member status to true and 200 points
     def enroll(self):
