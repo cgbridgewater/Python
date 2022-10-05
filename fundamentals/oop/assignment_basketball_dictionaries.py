@@ -1,23 +1,23 @@
 
 ######class and constructor
 class Players:
-    def __init__(self, data):
-        self.name = data['name']
-        self.age = data['age']
-        self.position = data['position']
-        self.team = data['team']
+    def __init__(self, player_info):
+        self.name = player_info['name']
+        self.age = player_info['age']
+        self.position = player_info['position']
+        self.team = player_info['team']
 
 
 ######  add players
     @classmethod
-    def add_players(cls, data):
-        player_objects = []
-        for dict in data:
-            player_objects.append(cls(dict))
-        return player_objects
-    
-    
-#### adds the string data back in
+    def add_players(cls, player_info):
+        player_list = []
+        for dict in player_info:
+            player_list.append(cls(dict))
+        return player_list
+
+
+#### adds the data back in string 
     def __repr__(self):
         display = f"Player: {self.name}, age: {self.age} , pos: {self.position}, team: {self.team}"
         return display
@@ -41,6 +41,7 @@ kyrie = {
         "team": "Brooklyn Nets"
 }
 
+
 ###### add a few legends to the list
 michael = {
         "name": "Michael Jordan", 
@@ -55,7 +56,6 @@ gary = {
 }
 
 
-
 #####send players into the class constructor
 player_jason = Players(jason)
 player_kevin = Players(kevin)
@@ -63,14 +63,13 @@ player_kyrie = Players(kyrie)
 player_michael = Players(michael)
 player_gary = Players(gary)
 
+
 ###### print each player
 print(player_jason)
 print(player_kevin)
 print(player_kyrie)
 print(player_michael)
 print(player_gary)
-
-
 
 
 #nothing to see here!!!
@@ -109,7 +108,6 @@ players = [
         "team": "en"
     }
 ]
-
 
 
 ######pull data from dictionary and append to new list
