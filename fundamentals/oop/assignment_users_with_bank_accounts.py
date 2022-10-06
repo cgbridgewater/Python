@@ -14,7 +14,7 @@ class BankAccount_Checking:
         return self
 
 
-# CHECKING DEPOSITE
+# CHECKING DEPOSIT
     def deposit(self, amount):
         self.balance += amount
         print(f"You have deposited ${amount}")
@@ -116,9 +116,10 @@ class BankAccount_Savings:
 # PRINT ALL ACCOUNTS -- STILL NOT SURE IF NEEDED
     @classmethod
     def print_all_accounts(cls):
+        sum = 0
         for account in cls.accounts:
             account.account_info()
-
+        return sum
 
 ######END SAVINGS ACCOUNT
 
@@ -184,11 +185,15 @@ class User:
 
 
 
+
+
+
 # FUNCTION TESTS!!
 
 
 #BUILD A BANKER
 mike = User("Mike","Jordon",45)
+dave = User("Dave", "Thomas", 66)
 #TEST
 print("---------------greating test")
 mike.greeting()
@@ -221,3 +226,7 @@ mike.check_balances()
 print("--------transfer to savings test and check balance------")
 mike.transfer_to_savings(350)
 mike.check_balances()
+
+
+print(f"Total Bank users - {User.population}")
+BankAccount_Checking.print_all_accounts()

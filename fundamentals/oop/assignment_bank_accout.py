@@ -53,9 +53,10 @@ class BankAccount:
 
     @classmethod
     def print_all_accounts(cls):
+        sum = 0
         for account in cls.accounts:
             account.account_info()
-
+        return sum
 
 
 
