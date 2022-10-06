@@ -25,14 +25,6 @@ class MathDojo:
 md = MathDojo()
 doMaths = MathDojo()
 
-# num_input= MathDojo()
-# first_var = input("input a number")
-# sec_var = input("input three numbers") #.split(',')
-# thrid_var = input("input two numbers") #.split(',')
-
-# y = md.add(first_var).add(sec_var).subtract(thrid_var).result
-# print(y)
-
 
 # to test:
 x = md.add(2).add(2,5,1).subtract(3,2).result
