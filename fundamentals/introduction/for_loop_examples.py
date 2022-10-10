@@ -15,7 +15,10 @@ for nums in range(3,10,3):
     print(nums)
 
 
-_list = [{"name":"nathan","age":31}, {"name":"billybob", "age":33}]
+_list = [{"name":"nathan","age":31}, {"name":"billybob", "age":33},
+{"name":"nathan","age":31}, {"name":"billybob", "age":33},
+{"name":"nathan","age":31}, {"name":"billybob", "age":33}
+]
 ## print index + variable
 for index in _list:
     print(index)
