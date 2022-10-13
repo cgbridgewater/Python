@@ -16,11 +16,13 @@ def hello(banana):
 def hola(banana, num):
     return f"Hola {banana * num}"
 
-# @app.route('/users/<username>/<id>')
-# def show_user_profile(username,id):
-#     print(username)
-#     print(id)
-#     return "username: " + username + ", id: " + id
+@app.route('/users/<username>/<id>')
+def show_user_profile(username,id):
+    print(username)
+    print(id)
+    return "username: " + username + ", id: " + id
+
+
 @app.route('/repeat/<int:num>/<string:word>')
 def repeat_word(num, word):
     output = ''
