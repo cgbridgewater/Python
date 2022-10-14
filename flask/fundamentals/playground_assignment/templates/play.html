@@ -6,19 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Play</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-
+    <style>
+        .make_box {
+        background-color: {{color}};
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>WELCOME!</h1>
-        <p>this page is working!!!!!</p>
 
-        <div class="main">
-            <div class="sub-content">1</div>
-            <div class="sub-content">2</div>
-            <div class="sub-content">3</div>
+    <!-- welcome header -->
+    <h1>Welcome!!!</h1>
 
-        </div>
+    <!-- container to hold and flex the boxes -->
+    <div class="container"     text-align: center;>
+
+        <!-- make the boxes based on loop from server screen loop -->
+            {% for box_count in range(num|default(3)): %}
+            <div class="make_box">{{ word }}</div>
+            {% endfor %}
+
     </div>
 </body>
 </html>
