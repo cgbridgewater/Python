@@ -1,11 +1,6 @@
 from flask import Flask, render_template, request
 app = Flask(__name__)
 
-###HOME PAGE
-@app.route('/')          
-def hello_world():
-    return render_template('index.html')
-
 ###PLAY PAGE ROUTES WITH STACKED INPUT OPTIONS
 @app.route('/play/', endpoint='play')
 @app.route('/play/<int:num>/', endpoint='<int:num>')
@@ -31,6 +26,11 @@ def play(num= 3,color=None):
     
     else:
         return render_template("play.html")
+
+@app.route('/', defaults = {'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    return render_template("dinosaur.html")
 
 
 if __name__=="__main__":   # Ensure this file is being run directly and not from a different module    
