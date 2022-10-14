@@ -10,7 +10,9 @@ def success():
     return "Great Success!!" #returns string as a response
 
 
-
+@app.route('/lists')
+def renderList():
+    return render_template('list.html', students = studentInfo, list=)
 
 #### this one is the working command!!!!! ####
 
@@ -47,14 +49,14 @@ def hello(banana=None,num=None):
 #     return "username: " + username + ", id: " + id
 
 
-# @app.route('/repeat/<int:num>/<string:word>')
-# def repeat_word(num, word):
-#     output = ''
+@app.route('/repeat/<int:num>/<string:word>')
+def repeat_word(num, word):
+    output = ''
 
-#     for i in range(0,num):
-#         output += f"<p>{word}</p>"
+    for i in range(0,num):
+        output += f"<p>{word}</p>"
 
-#     return output
+    return output
 
 
 if __name__=="__main__":   # Ensure this file is being run directly and not from a different module    
