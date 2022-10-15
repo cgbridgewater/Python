@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+<h1>test test!!!!    index_4 page</h1>
+
+<body>
+
+    <main>
+
+        <div class="height">
+            <!-- make the boxes based on loop from server screen loop -->
+            {% for box_count in range(num|default(8)): %}
+                {% if box_count %2 == 0 %}
+                    <div class="make_box1">{{ height }}</div>
+                {% else %}
+                <div class="make_box2">{{ height }}</div>
+                {% endif %}
+            {% endfor %}
+
+        </div>
+
+        <div class="width">
+            <!-- make the boxes based on loop from server screen loop -->
+            {% for box_count2 in range(nums|default(8)): %}
+                {% if box_count2 %2 == 0 %}
+                    <div class="make_box2">{{ width }}</div>
+                {% else %}
+                    <div class="make_box1">{{ width }}</div>
+                {% endif %}
+            {% endfor %}
+
+        </div>
+
+    </main>
+
+
+
+</body>
+<script type="text/javascript" src="{{ url_for('static', filename='my_script.js') }}"></script>
+</html>
