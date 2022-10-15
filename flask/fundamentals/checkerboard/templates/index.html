@@ -7,14 +7,14 @@
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     <style>/* STYLE OVERRIDES FROM INPUT ON URL */
-        .color1, header{
-        background-color: {{color}};
+        .color2, header{
+        background-color: {{other_color}};
         }
         h1{
-        color:{{other_color}};
+        color:{{color}};
         }
-        .color2{
-        background-color: {{other_color}};
+        .color1{
+        background-color: {{color}};
         }
     </style>
 </head>
