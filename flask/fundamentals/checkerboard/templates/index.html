@@ -6,17 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-
+    <style>/* STYLE OVERRIDES FROM INPUT ON URL */
+        .color1, header{
+        background-color: {{color}};
+        }
+        h1{
+        color:{{other_color}};
+        }
+        .color2{
+        background-color: {{other_color}};
+        }
+    </style>
 </head>
-<h1>test test  main page</h1>
-
 <body>
-
-
-
-
-
+    <!-- HEADER -->
+    <header>
+        <h1>***Checkerboard***</h1>
+    </header>
+    <main>
+        <!-- CHECKERS TABLE -->
+        <table>
+            <!-- FOR LOOP TO MAKE ROWS BASED ON INPUT -->
+            {% for i in range(num): %}
+                <tr>
+                    <!-- FOR LOOP TO MAKE COLUMNS BASED ON INPUT ### 8 AS DEFAULT -->
+                    {% for j in range(nums|default(8)): %}
+                    <td class="color{{ (i+j)%2+1}}"></td>
+                    {% endfor %}
+                {% endfor %}
+                </tr>
+        </table>
+    </main>
 
 </body>
-<script type="text/javascript" src="{{ url_for('static', filename='my_script.js') }}"></script>
 </html>
