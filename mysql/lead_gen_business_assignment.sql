@@ -70,41 +70,22 @@ GROUP BY monthname(billing.charged_datetime)
 order by clients.client_id, charged_datetime;
 
 
-select billing_id, concat(clients.first_name,' ', clients.last_name) AS client_name, amount, month(charged_datetime), year(charged_datetime) from billing
-JOIN clients ON billing.client_id = clients.client_id
-order by billing_id, month(charged_datetime);
--- where 
--- 	exists ( select client_id, sum(amount) FROM billing
---     order by billing.client_id);
 
 
 
 
--- this one i think if i can sub query it
-select  clients.first_name, amount,  MONTH(charged_datetime) AS month, YEAR(charged_datetime) AS year from billing
-join clients on billing.client_id = clients.client_id
-order by billing.client_id, charged_datetime asc;
+SELECT CONCAT(clients.first_name, ' ', clients.last_name) AS client_name, SUM(billing.amount) AS monthly_revenue, DATE_FORMAT(billing.charged_datetime, '%M') AS 'month', DATE_FORMAT(billing.charged_datetime, '%Y') AS 'year'
+FROM clients
+	LEFT JOIN billing ON clients.client_id = billing.client_id
+GROUP BY client_name, MONTH(billing.charged_datetime), YEAR(billing.charged_datetime)
+ORDER BY clients.client_id;
 
 
-
-
-select billing_id, clients.first_name, amount,  MONTH(charged_datetime) AS month_billed, YEAR(charged_datetime) AS year_billed from billing
-join clients on billing.client_id = clients.client_id
-WHERE MONTH(billing.charged_datetime)  IN (
-	SELECT MONTH(charged_datetime)
-	FROM billing
-    GROUP BY MONTH(charged_datetime) )
-    order by billing.client_id, charged_datetime asc; 
-    
-    
-  
-
-
-select *
-From (select billing_id, concat(clients.first_name,' ', clients.last_name) AS client_name, amount,  MONTH(charged_datetime) AS month_charged, YEAR(charged_datetime) AS year_charged from billing
-join clients on billing.client_id = clients.client_id
-order by billing.client_id, charged_datetime asc) a
-where month_charged in (select month(charged_datetime) from billing group by month(charged_datetime) );
+SELECT CONCAT(clients.first_name, ' ', clients.last_name) AS client_name, SUM(billing.amount) AS monthly_revenue, DATE_FORMAT(billing.charged_datetime, '%M') AS 'month', DATE_FORMAT(billing.charged_datetime, '%Y') AS 'year'
+FROM clients
+	JOIN billing ON clients.client_id = billing.client_id
+GROUP BY client_name, MONTH(billing.charged_datetime), YEAR(billing.charged_datetime)
+ORDER BY clients.client_id;
 
 
 

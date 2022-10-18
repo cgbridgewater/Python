@@ -4,22 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>HTML Table</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body>
+<!-- add a container to center and size the table -->
+    <div class="mx-auto mt-3" style="width: 60%;">
 
-
-
-
-
-    <h1>test test</h1>
-
-
-
-
-
+        <!-- table and bootstrap -->
+        <table class="table table-hover table table-bordered border-dark">
+            <thead class="table-dark">
+                <tr class="text-warning">
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Full Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user['first_name'] }}</td>
+                        <td>{{ user['last_name'] }}</td>
+                        <td>{{ user['first_name'] }} {{ user['last_name'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+    </div>
 </body>
+
 <script type="text/javascript" src="{{ url_for('static', filename='my_script.js') }}"></script>
 </html>
