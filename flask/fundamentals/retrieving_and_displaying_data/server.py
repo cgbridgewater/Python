@@ -2,18 +2,11 @@ from flask import Flask, render_template  # Import Flask to allow us to create o
 app = Flask(__name__)    # Create a new instance of the Flask class called "app"
 
 
-
-
 @app.route('/')
-def home_page():
-    return render_template("index.html")
-
-
-
-
-
-
-
+def index():
+    friends = Friend.get_all()
+    print(friends)
+    return render_template("index.html", all_friends = friends)
 
 
 
