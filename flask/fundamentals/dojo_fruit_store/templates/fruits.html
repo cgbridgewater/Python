@@ -22,9 +22,45 @@
       <main role="main">
   
         <section class="jumbotron text-center">
-          <div class="container">
+          <div class="container" >
             <h1 class="jumbotron-heading">Dojo Fruits</h1>
-            <p>Please figure out how to display the images here...</p>
+            
+            <div class="hero-unit">
+                <p>
+                    <img width="150" height="150" src="{{ url_for('static', filename='img/apple.png') }}" alt="dojo apple">
+                    
+                  </a>The Dojo's crisp apples
+                </p>
+            </div>
+
+            
+            <div class="hero-unit">
+                <p>
+                    <img width="150" height="150" src="{{ url_for('static', filename='img/blackberry.png') }}" alt="dojo blackberry">
+                    
+                </a>The Dojo's juicy blackberries
+                </p>
+        </div>
+
+        <div class="hero-unit">
+            <p>
+                <img width="150" height="150" src="{{ url_for('static', filename='img/raspberry.png') }}" alt="dojo raspberry">
+            </a>The Dojo's fresh raspberries
+
+            </p>
+        </div>
+        
+            <div class="hero-unit">
+                <p>
+                    <img width="150" height="150" src="{{ url_for('static', filename='img/strawberry.png') }}" alt="dojo strawberry">    
+                    
+                  </a>The Dojo's amazing strawberries
+                </p>
+            </div>
+
+
+
+
 
             <p>
               <a href="/" class="btn btn-primary my-2">Go back</a>
