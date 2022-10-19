@@ -9,20 +9,31 @@
 </head>
 <body>
 
-
-    <div class="container text-center mt-5 bg-secondary p-2 text-dark bg-opacity-20">
-        <div class=" p-3 bg-light p-2 text-dark bg-opacity-25">
-            <div class="col order-2">
-                <p class="rounded-pill bg-danger bg-opacity-25">WELCOME TO THE COUNTER!!!</p>
+    <!-- container and background color -->
+    <div class="container text-center mt-5 bg-secondary p-5 text-dark bg-opacity-100">
+        
+        <!-- top section -->
+        <div class="p-3 mx-2 bg-secondary  text-dark bg-opacity-75">
+            <div>
+                <p class="rounded-pill bg-danger bg-opacity-25 shadow mb-1 opacity-75 ">WELCOME TO THE COUNTER!!!</p>
             </div>
-            <div class="col order-1">
-                <p class="rounded-pill bg-warning bg-opacity-25" >Total Site Hits : {{session['hits']}} </p>
+            <div>
+                <p class="rounded-pill bg-warning bg-opacity-25 shadow mb-1 opacity-75 " >Total Site Hits : {{session['hits']}} </p>
             </div>
-            <div class="col order-3">
-                <p class="rounded-pill bg-success bg-opacity-25">Sit Visits Since Counter Reset : {{session['counter']}}</p>
+            <div>
+                <p class="rounded-pill bg-success bg-opacity-25 shadow mb-1 opacity-75 ">Sit Visits Since Counter Reset : {{session['counter']}}</p>
+            </div>
+            <div>
+                <p> 
+                    <form class="rounded-pill bg-light bg-opacity-25 shadow mb-1 opacity-75 " action='/addon' method='post'>
+                        <input class="rounded-pill border border-white bg-light bg-opacity-50 text-center" type='int' name='nums' placeholder="Add A Number:">
+                    </form>
+                </p>
             </div>
         </div>
-        <div class="row p-3 bg-light   text-dark bg-opacity-25">
+
+        <!-- middle section added just in case  -->
+        <div class="row bg-secondary  text-dark bg-opacity-75">
             <div class="col order-1">
                 <p></p>
             </div>
@@ -33,24 +44,24 @@
                 <p></p>
             </div>
         </div>
-        <div class="row p-3 bg-light text-dark bg-opacity-25 ">
+
+        <!-- bottom section -->
+        <div class="row bg-secondary  text-dark bg-opacity-75 ">
             <div class="col order-1">
-                    <p><a href="{{ url_for('destroy_session') }}"><label class="btn btn-danger shadow p-3 mb-5" for='destroy'>End Session</label></a></p>
+                    <p><a href="{{ url_for('destroy_session') }}"><label class="btn btn-danger shadow mb-5" for='destroy'>End Session</label></a></p>
             </div>
-            <div class="col order-2">
-                <p><a href="{{ url_for('plus_one') }}"><label class="btn btn-info shadow p-3 mb-5 opacity-75 " for='plus_one'>Plus 1</label></a></p>              
-            </div>
-            <div class="col order-3">
-                <p><a href="{{ url_for('plus_two') }}"><label class="btn btn-info shadow p-3 mb-5  " for='plus_two'>Plus 2</label></a></p>            
+            <div class="col order-2 ">
+                <p><a href="{{ url_for('plus_one') }}"><label class="btn btn-info shadow mb-5 opacity-75 " for='plus_one'>Plus 1</label></a></p>              
             </div>
             <div class="col order-3">
-                <p><a href="{{ url_for('clear_session') }}"><label class="btn btn-primary shadow p-3 mb-5 opacity-75 " for='clear'>Clear Visits</label></a></p>            
+                <p><a href="{{ url_for('plus_two') }}"><label class="btn btn-info shadow mb-5  " for='plus_two'>Plus 2</label></a></p>            
+            </div>
+            <div class="col order-4">
+                <p><a href="{{ url_for('clear_session') }}"><label class="btn btn-primary shadow mb-5 opacity-75 " for='clear'>Clear Visits</label></a></p>            
             </div>
         </div>
-      </div>
-    
 
-
+    </div>
 
 </body>
 </html>
