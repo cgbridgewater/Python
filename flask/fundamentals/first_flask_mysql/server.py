@@ -1,23 +1,16 @@
-from flask import Flask, render_template  # Import Flask to allow us to create our app
-app = Flask(__name__)    # Create a new instance of the Flask class called "app"
+from flask import Flask, render_template 
 
+from friend import Friend
+app = Flask(__name__)  
+app.secret_key = 'mums the word'
 
-
-
-@app.route('/')
-def home_page():
+@app.route("/")
+def index():
+    friends = Friend.get_all()
+    print(friends)
     return render_template("index.html")
 
 
-
-
-
-
-
-
-
-
-
-if __name__=="__main__":   # Ensure this file is being run directly and not from a different module    
-    app.run(debug=True)    # Run the app in debug mode.
+if __name__=="__main__":
+    app.run(debug=True)
 
