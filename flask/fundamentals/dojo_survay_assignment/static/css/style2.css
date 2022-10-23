@@ -1,0 +1,11 @@
+main{
+    margin: 50px auto;
+    padding: 40px;
+    width: 450px;
+    text-align: center;
+}
+
+
+#name, #location, #language, #comments{
+    width: 90%;
+}
