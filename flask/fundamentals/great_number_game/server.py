@@ -5,16 +5,13 @@ app = Flask(__name__)
 app.secret_key = 'mums the word'
 
 
-
+### Home
 @app.route('/')
 def setNumber():
     if 'randomNum' not in session:
         session['randomNum'] = random.randint(1,5)
-        
     if 'guesses' not in session:
         session['guesses'] = 0
-
-    
     return render_template('index.html')
 
 
@@ -29,7 +26,7 @@ def guessNumber():
     return redirect("/")
 
 
-
+### name input for leader board
 @app.route('/names', methods = ['POST'])
 def getNames():
     session['first_name'] = request.form['first_name']
@@ -37,13 +34,13 @@ def getNames():
     return redirect('/leaderboard')
 
 
-
+### leaderboard display
 @app.route('/leaderboard')
 def leaders():
     return render_template('leaderboard.html')
 
 
-### reset
+### reset sessions
 @app.route('/reset')
 def resetGame():
     session.pop('randomNum')
@@ -51,6 +48,8 @@ def resetGame():
     session.pop('guesses')
     return redirect("/")
 
+
+### reset everything including leaderboard
 @app.route('/clear')
 def clearAll():
     session.clear()
@@ -62,7 +61,6 @@ def clearAll():
 @app.route('/<path:path>')
 def catch_all(path):
     return render_template("dino_game.html")
-
 
 
 ### DEBUGGING
