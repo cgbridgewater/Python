@@ -22,11 +22,11 @@ class Item:
         result = connectToMySQL('items_schema').query_db(query,data)
         return result
 
-    @classmethod
-    def save(cls,data):
-        query = "UPDATE items (name,weight) SET (%(name)s, %(weight)s);"
-        result = connectToMySQL('items_schema').query_db(query,data)
-        return result
+    # @classmethod
+    # def save(cls,data):
+    #     query = "UPDATE items (name,weight) SET (%(name)s, %(weight)s);"
+    #     result = connectToMySQL('items_schema').query_db(query,data)
+    #     return result
 
 
 ### make delete
