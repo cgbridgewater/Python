@@ -10,17 +10,19 @@
 
 </head>
 <body>
-
+    <!-- container -->
     <main class="bg-secondary border border-5 border-dark text-start text-white">
+        <!-- survay header -->
         <h3 class="text-warning">Dojo Survey</h3>
-        <form action='/users' method='post'>
+        <!-- name input -->
+        <form action="/process" method='post'>
             <div ><label for='name'>Name:</label></div>
             <div >
                 <input type='text' name='name'placeholder="Your name..." id="name" >
-            </div>
+            </div><!-- end name input -->
+            <!-- location drop down -->
             <div ><label for="dojoLocation" >Dojo Location</label></div>
             <div>
-                <!-- location drop down -->
                 <select name="dojoLocation" class="d-block p-2 text-bg-white" id="location">
                     <option value="">--Please Select A Location--</option>
                     <option>Chicago</option>
@@ -29,10 +31,10 @@
                     <option>Burbank</option>
                     <option>Bellevue</option>
                 </select>
-            </div>
+            </div><!-- end location drop down -->
+            <!-- language drop down -->
             <div><label for="favLang">Favorite Language</label></div>
             <div>
-                <!-- language drop down -->
                 <select name="favLang" class="d-block p-2 text-bg-white" id="language">
                     <option value="">--Please Select A Language--</option>
                     <option>HTML</option>
@@ -41,18 +43,34 @@
                     <option>Python</option>
                     <option>C#</option>
                 </select>
-            </div>
+            </div><!-- end language drop down -->
+            <!-- comments -->
             <div>Comments</div>
             <div> 
                 <textarea name="comment" cols="20" rows="6" placeholder="comments..." id="comments"></textarea>
+            </div><!-- end comments -->
+            <!-- sensei bonus - check box -->
+            <div>
+                <input type="checkbox" name="spam" value="Yes"unchecked>
+                <label for="spam">Please sign me up extra for language info</label>
+                <input type='hidden' name='spam' value="No" checked>
             </div>
+            <!-- ninja bonus - radio buttons -->
+            <div>
+                <input type="radio" id="html" name="extraLanguage" value="ruby">
+                <label for="html">Ruby</label><br>
+                <input type="radio" id="css" name="extraLanguage" value="MERN">
+                <label for="css">MERN</label><br>
+                <input type="radio" id="javascript" name="extraLanguage" value="C++">
+                <label for="javascript">C++</label>
+                <input type="hidden" id="none" name="extraLanguage" value="No" checked>
+            </div>
+            <!-- submit button -->
             <div>
                 <input type='submit' value='SUBMIT' class="bg-warning">
-            </div>    
+            </div>
         </form>
     </main>
-
-
 </body>
 <script type="text/javascript" src="{{ url_for('static', filename='my_script.js') }}"></script>
 </html>
