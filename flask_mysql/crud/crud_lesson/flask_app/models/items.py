@@ -22,7 +22,6 @@ class Item:
         result = connectToMySQL('items_schema').query_db(query,data)
         return result
 
-
     @classmethod
     def save(cls,data):
         query = "UPDATE items (name,weight) SET (%(name)s, %(weight)s);"
@@ -30,10 +29,9 @@ class Item:
         return result
 
 
-
 ### make delete
     #     @classmethod
     # def save(cls,data):
-    #     query = "INSERT INTO items (name,weight) VALUES (%(name)s, %(weight)s);"
+    #     query = "DELETE FROM items (name,weight) WHERE (%(name)s, %(weight)s);"
     #     result = connectToMySQL('items_schema').query_db(query,data)
     #     return result

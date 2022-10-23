@@ -18,3 +18,16 @@ def addItem():
     print(request.form)
     Item.save(request.form)
     return redirect('/')
+
+
+# @app.route("/create/item" , methods=['POST'])
+# def addItem():
+#     print(request.form)
+#     Item.save(request.form)
+#     return redirect('/')
+
+#     @app.route("/create/item" , methods=['POST'])
+# def addItem():
+#     print(request.form)
+#     Item.save(request.form)
+#     return redirect('/')
