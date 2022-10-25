@@ -24,9 +24,7 @@ def newUserForm():
 ### ROUTE TO CREATE NEW USER AND DIRECT TO USER PROFILE PAGE (WORKING)
 @app.route("/users/creating" , methods=['POST'])
 def addUser():
-    print(request.form)
     new_user_id = User.save(request.form)
-    print(new_user_id)
     return redirect(f'/users/read/{new_user_id}')
 
 

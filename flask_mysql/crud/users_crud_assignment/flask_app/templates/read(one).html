@@ -40,8 +40,14 @@
                         <td>{{ user.created_at.strftime("%B %e, %Y") }}</td>
                     </tr>
                     <tr class="text-start">
-                        <td>Updated On: </td>
-                        <td>{{ user.updated_at }}</td>
+                        <td>Last Updated: </td>
+                        <td><!-- LOOP TO FIX Null on date and time -->
+                            {% if user.updated_at is not none %}
+                                {{user.updated_at.strftime("%B %e, %Y")}}
+                            {% else %}
+                                NONE
+                                {% endif %}
+                        </td>
                     </tr>
                 </tbody>
             </table><!-- table END -->

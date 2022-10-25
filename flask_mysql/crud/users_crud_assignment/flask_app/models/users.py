@@ -26,8 +26,8 @@ class User:
     @classmethod
     def save(cls,data):
         query = "INSERT INTO users (first_name, last_name,email) VALUES (%(first_name)s, %(last_name)s, %(email)s);"
-        result = connectToMySQL('users_cr').query_db(query,data)
-        return result
+        return connectToMySQL('users_cr').query_db(query,data)
+
 
 
 ### GET USER BY ID (WORKING)
@@ -45,8 +45,8 @@ class User:
     @classmethod
     def updateUser(cls,data):
         query = "UPDATE users SET first_name = %(first_name)s, last_name = %(last_name)s, email = %(email)s WHERE id = %(id)s;"
-        result = connectToMySQL('users_cr').query_db(query,data)
-        return result
+        return connectToMySQL('users_cr').query_db(query,data)
+
 
 
 ### DELETE USER BY ID (WORKING)
