@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style3.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<!-- body -->
+<body class="body">
+    <!-- nav bar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <a id="navText" class="navbar-brand fs-2">User Profile - {{user.id}}</a>
+            <!-- button -->
+            <button class="input"><a id="link" href="/users">Return To Home Page</a></button>
+            <!-- button END -->
+        </div>
+    </nav><!-- nav bar END -->
+    <!-- main content box -->
+    <main>
+        <!-- container for css -->
+        <div class="wrapper">
+            <!-- table to display info -->
+            <table class="table table-hover">
+                <tbody>
+                    <tr class="text-start">
+                        <td>Full Name: </td>
+                        <td>{{ user.first_name }} {{ user.last_name }}</td>
+                    </tr>
+                    <tr class="text-start">
+                        <td>Email: </td>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr class="text-start">
+                        <td>Created On: </td>
+                        <td>{{ user.created_at.strftime("%B %e, %Y") }}</td>
+                    </tr>
+                    <tr class="text-start">
+                        <td>Updated On: </td>
+                        <td>{{ user.updated_at }}</td>
+                    </tr>
+                </tbody>
+            </table><!-- table END -->
+            <!-- bottom page buttons -->
+            <button class="input2">
+                <a href="/users/edit/{{user.id}}" id="link">Edit Profile</a>
+            </button>
+            <button class="input2">
+                <a href="/users/delete/{{user.id}}" id="link">Delete Profile</a>
+            </button><!-- buttons END -->
+        </div>
+    </main>
+</body>
+</html>

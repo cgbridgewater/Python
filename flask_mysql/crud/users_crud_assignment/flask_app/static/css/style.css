@@ -1,0 +1,57 @@
+/* style sheet for read(All).html */
+
+.body{
+    background-color: darkkhaki;
+}
+
+nav{
+    background-color: beige;
+    border-bottom: 3px solid chocolate;
+}
+
+#navText{
+    margin-left: 10%;
+    color: brown;
+}
+
+.wrapper{
+    margin: 0 auto;
+    margin-top: 40px;
+    background-color: beige;
+    border: 3px solid chocolate;
+    border-radius: 15px;
+    width: 80%;
+}
+
+.table table-hover  {
+    margin: 50px auto;
+    padding: 10px;
+    width: auto;
+    text-align: center;
+}
+
+th{
+    color: brown;
+}
+
+.input{
+    color: brown;
+    background-color:burlywood;
+    border-color: chocolate;
+    border-radius: 20%;
+    margin-bottom: 10px;
+}
+
+.input2{
+    color: brown;
+    background-color:burlywood;
+    border-color: chocolate;
+    border-radius: 20%;
+    margin-bottom: 10px;
+    margin-left: 15%;
+}
+
+#link{
+    text-decoration: none;
+    color: brown;
+}

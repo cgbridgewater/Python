@@ -1,0 +1,59 @@
+/* style sheet for edit.html */
+
+.body{
+    background-color: darkkhaki;
+}
+
+nav{
+    background-color: beige;
+    border-bottom: 3px solid chocolate;
+}
+
+#navText{
+    margin-left: 10%;
+    color: brown;
+}
+
+main{
+    background-color: darkkhaki;
+}
+
+.wrapper{
+    margin: 50px auto;
+    padding: 10px;
+    width: 350px;
+    text-align: center;
+    background-color: beige;
+    border: 3px solid chocolate;
+    border-radius: 15px;
+}
+
+form{
+    background-color: beige;
+}
+
+label{
+    color: brown;
+}
+
+.input{
+    color: brown;
+    background-color:burlywood;
+    border-color: chocolate;
+    border-radius: 20%;
+    margin-top: 5px;
+}
+
+#link{
+    text-decoration: none;
+    color: brown;
+}
+
+.input2{
+    color: brown;
+    background-color:burlywood;
+    border-color: chocolate;
+    border-radius: 20%;
+    margin-bottom: 10px;
+    margin-left: 15%;
+}
