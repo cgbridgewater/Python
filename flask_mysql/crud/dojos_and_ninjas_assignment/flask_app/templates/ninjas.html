@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninjas</title>
+</head>
+<body>
+    
+<h1>
+    TEST TEST
+</h1>
+
+            <!-- form start -->
+            <form action="/dojos/ninjas/create" method = "POST">
+                <select name="dojo_id" id="">
+                    {% for dojo in all_the_dojos%}
+                    <option value="{{dojo.id}}"> {{dojo.name}} </option>
+                    {% endfor%}
+                </select>
+                <div class="text-start" >
+                    <label for="first_name" class="text-sm-start">First Name:</label>
+                </div>
+                <div>
+                    <input type="text" name="first_name" class="form-control bg-light">
+                </div>
+                <div class="text-start" >
+                    <label for="last_name" class="text-start" >Last Name:</label>
+                </div>
+                <div>
+                    <input type="text" name="last_name" class="form-control bg-light">
+                </div>
+                <div class="text-start">
+                    <label for="email">Age:</label>
+                </div>
+                <div>
+                    <input type="text" name="age" class="form-control bg-light">
+                </div>
+                <input type="submit" value="Create Ninja" class="input" >
+            </form><!--form END -->
+
+
+
+
+</body>
+</html>
