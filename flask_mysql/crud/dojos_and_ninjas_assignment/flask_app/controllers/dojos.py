@@ -37,10 +37,6 @@ def showOneDojo(id):
 
 
 
-
-
-
-
 ### DINO GAME CATCH ALL (WORKING)
 @app.route('/', defaults = {'path': ''})
 @app.route('/<path:path>')
