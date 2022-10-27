@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Ninjas</title>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-        <style>
-            body {
-                background-color: black;
-                background-image: url(https://codingdojoborne.files.wordpress.com/2014/05/coding-dojo-circle-logo.jpg);
-                background-size: 100%;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-attachment: fixed;
-            }
-            .award{
-                height: 50px;
-            }
-            </style>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninjas</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: black;
+            background-image: url(https://codingdojoborne.files.wordpress.com/2014/05/coding-dojo-circle-logo.jpg);
+            background-size: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .award{
+            height: 50px;
+        }
+    </style>
 </head>
 <body>
+    <!-- award logo -->
     <div>
         <img class="award" src="https://cutecdn.codingdojo.com/new_design_image/new_programs/onsite/coursereport_best_coding_bootcamp_2022.png" alt="best bootcamp award">
     </div>
-    
+    <!-- container -->
     <div class="mt-5 ms-5">
         <!-- form start -->
         <form action="/dojos/ninjas/create" method = "POST">

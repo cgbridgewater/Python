@@ -19,7 +19,7 @@ class Ninja:
     @classmethod
     def addNinja(cls,data):
         query = "INSERT INTO ninjas (dojo_id, first_name, last_name, age) VALUES (%(dojo_id)s, %(first_name)s, %(last_name)s, %(age)s);"
-        print("ADDING NINJA!!!!!")
+        print("ADDING NINJA!")
         return connectToMySQL('dojos_and_ninjas_schema').query_db(query,data)
 
 
@@ -38,57 +38,13 @@ class Ninja:
     @classmethod
     def updateNinja(cls,data):
         query = "UPDATE ninjas SET first_name = %(first_name)s, last_name = %(last_name)s, age = %(age)s WHERE id = %(id)s;"
-        print("updating")
         print("UPDATING NINJA")
         return connectToMySQL('dojos_and_ninjas_schema').query_db(query,data)
-
 
 
 ### DELETE USER BY ID (WORKING)
     @classmethod
     def deleteNinja(cls,data):
         query = "DELETE FROM ninjas WHERE id = %(id)s;"
+        print("DELETING NINJA!")
         return connectToMySQL('dojos_and_ninjas_schema').query_db(query,data)
-
-
-
-
-
-# ### GET ALL USERS (WORKING)
-#     @classmethod
-#     def get_all(cls):
-#         query = "SELECT * FROM users;"
-#         results = connectToMySQL('users_cr').query_db(query)
-#         users = []
-#         for i in results:
-#             users.append(cls(i))
-#         return users
-
-
-
-
-
-# ### GET USER BY ID (WORKING)
-#     @classmethod
-#     def get_one_user(cls,data):
-#         query = "SELECT * FROM users WHERE id = %(id)s;"
-#         result = connectToMySQL('users_cr').query_db(query,data)
-#         if len(result) == 0: #if no users found, return an empty list
-#             return None
-#         else: # if at least one user found
-#             return cls(result[0])
-
-
-# ### UPDATE USER BY ID (WORKING)
-#     @classmethod
-#     def updateUser(cls,data):
-#         query = "UPDATE users SET first_name = %(first_name)s, last_name = %(last_name)s, email = %(email)s WHERE id = %(id)s;"
-#         return connectToMySQL('users_cr').query_db(query,data)
-
-
-
-# ### DELETE USER BY ID (WORKING)
-#     @classmethod
-#     def deleteUser(cls,data):
-#         query = "DELETE FROM users WHERE id = %(id)s;"
-#         return connectToMySQL('users_cr').query_db(query,data) 
