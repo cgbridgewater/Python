@@ -27,7 +27,7 @@ def addUser():
 
 
 
-### ROUTE TO VIEW USER PROFILE PAGE BY "ID" (NOT WORKING)
+### ROUTE TO VIEW USER PROFILE PAGE BY "ID" (WORKING)
 @app.route('/dojos/<int:id>')
 def showOneDojo(id):
     data = {

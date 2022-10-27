@@ -12,7 +12,7 @@ class Dojo:
         self.ninjas = []
 
 
-### CREATE AND SAVE NEW Dojo (Testing...)
+### CREATE AND SAVE NEW Dojo (WORKING)
     @classmethod
     def create(cls,data):
         query = "INSERT INTO dojos (name) VALUES (%(name)s);"
@@ -30,7 +30,7 @@ class Dojo:
         return dojos
 
 
-### (testing!!!!)
+### (WORKS)
     @classmethod
     def getDojoAndNinjas(cls,data):
         query = "SELECT * FROM dojos LEFT JOIN ninjas ON ninjas.dojo_id = dojos.id WHERE dojos.id = %(id)s;"
