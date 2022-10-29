@@ -11,8 +11,8 @@ class Ninja:
         self.age = data['age']    
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
-        # self.dojo_id = dojo.id
-        self.owner = None
+        self.dojo_id = data['dojo_id']
+        # self.owner = None
 
 
 # ### CREATE AND SAVE NEW NINJA(WORKING)
