@@ -54,3 +54,16 @@ class Author:
             }
             one_author.books.append( book.Book( book_data))
         return one_author
+
+
+### (WORKING)
+    @classmethod
+    def getNotFavoritesAuthors(cls,data): 
+        query = "SELECT * FROM authors WHERE authors.id NOT IN (SELECT author_id FROM favorites WHERE book_id  = %(id)s);"
+        results = connectToMySQL('books_schema').query_db(query,data)
+        pprint("NOT FAVORITED BOOK LIST")
+        pprint(results)
+        nonFavAuthors = []
+        for a in results:
+            nonFavAuthors.append(cls(a))
+        return nonFavAuthors

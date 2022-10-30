@@ -13,7 +13,7 @@
             body {
                 background-color: black;
                 background-image: url(https://img.freepik.com/premium-vector/bookcase-library-bestseller-bookshop-cartoon-style-vector-illustration_499431-682.jpg?w=1380
-    );
+            );
                 background-size: 80%;
                 background-position: center;
                 background-repeat: no-repeat;
@@ -61,8 +61,8 @@
                         <label for="favoriteBook" class=" p-1 text-sm-start text-light border border-light bg-dark bg-opacity-75 bg-gradient">Add A Favorite Book</label><!-- PAY ATTENTION TO THE FORMAT HERE....IT LOOKS BACKWARDS -->
                     </div>
                     <select name="book_id" class="bg-dark text-light bg-gradient bg-opacity-75 rounded-2 shadow-lg">
-                        {% for i in one_book %}
-                        <option value="{{i.id}}"> {{i.title}} </option>
+                        {% for b in one_book %}
+                        <option value="{{b.id}}"> {{b.title}} </option>
                         {% endfor%}
                     </select>
                         <input type="hidden" name="author_id" value="{{one_author.id}}">

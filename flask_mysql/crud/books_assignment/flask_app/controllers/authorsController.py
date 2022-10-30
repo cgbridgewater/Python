@@ -46,3 +46,10 @@ def addAuthorsFavorites():
     Favorite.createFavorites(request.form)
     pprint(request.form)
     return redirect(f'/authors/{author_id}')
+
+
+### DINO GAME CATCH ALL (WORKING)
+@app.route('/', defaults = {'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    return render_template("dinosaur.html")

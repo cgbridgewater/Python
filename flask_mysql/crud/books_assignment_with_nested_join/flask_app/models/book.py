@@ -24,7 +24,7 @@ class Book:
         return connectToMySQL('books_schema').query_db(query,data)
 
 
-### GET ALL Book (Testing)
+### GET ALL Book (WORKING)
     @classmethod
     def getAllBooks(cls):
         query = "SELECT * FROM books;"
@@ -42,6 +42,7 @@ class Book:
     def getBooksWithAuthors(cls,data):
         query = "SELECT * FROM books LEFT JOIN favorites ON favorites.book_id = books.id LEFT Join authors ON favorites.author_id = authors.id WHERE books.id = %(id)s;"
         results = connectToMySQL('books_schema').query_db(query,data)
+        pprint("GET BOOKS WITH AUTHORS")
         pprint(results)  ### use this printstatement with nothing after!!!!    match id tags in print to match below needs!!!
         one_book = cls( results[0] )
         for row in results:
@@ -56,23 +57,29 @@ class Book:
         return one_book
 
 
-# ### (WORKING)
+
+### (WORKING)
+    @classmethod
+    def getNotFavoritesBooks(cls,data): 
+        query = "SELECT * FROM books WHERE books.id NOT IN ( SELECT book_id FROM favorites WHERE author_id = %(id)s);"
+        results = connectToMySQL('books_schema').query_db(query,data)
+        pprint("NOT FAVORITED BOOK LIST")
+        pprint(results)
+        nonFavBooks = []
+        for b in results:
+            nonFavBooks.append(cls(b))
+        return nonFavBooks
+
+
+
+
+
+
+# ### (WORKING but not in needed)
 #     @classmethod
 #     def booksJoin(cls):
 #         query = "SELECT * FROM books LEFT JOIN favorites ON favorites.book_id = books.id;"
 #         pprint('JOINING BOOKS AND FAVS')
 #         pprint(query)
 #         return connectToMySQL('books_schema').query_db(query)
-
-
-### (TESTING)
-    # @classmethod
-    # def getNotFavoritesBooks(cls,data): 
-    #     query = "SELECT * FROM books WHERE books.id NOT IN ( SELECT book_id FROM favorites WHERE author_id = %(id)s);"
-    #     results = connectToMySQL('books_schema').query_db(query,data)
-    #     pprint("NOT FAVORITED BOOK LIST")
-    #     pprint(results)
-    #     nonFavBooks = []
-    #     for b in results:
-    #         nonFavBooks.append(cls(b))
     #     return nonFavBooks

@@ -8,9 +8,8 @@ from flask_app.models.favorite import Favorite
 
 ### WORKING
 @app.route('/')
-def index():
+def home():
     return redirect('/authors')
-
 
 ### WORKING
 @app.route('/authors')
@@ -25,13 +24,22 @@ def createAuthor():
     return redirect(f'/authors')
 
 
-### ROUTE TO VIEW AUTHOR PAGE BY "ID" (WORKING)
+# ### ROUTE TO VIEW AUTHOR PAGE BY "ID" (WORKING)   DROP DOWN USES ALL UPTIONS AVAILABLE
+# @app.route('/authors/<int:id>')
+# def showAuthor(id):
+#     data = {
+#     "id" : id
+#     }
+#     return render_template("authors(one).html",  one_author = Author.getAuthorsAndBooks(data), one_book = Book.getAllBooks())
+
+### ROUTE TO VIEW AUTHOR PAGE BY "ID" (WORKING)  DROP DOWN ONLY USES UNUSED OPTIONS!!!
 @app.route('/authors/<int:id>')
 def showAuthor(id):
     data = {
     "id" : id
     }
-    return render_template("authors(one).html",  one_author = Author.getAuthorsAndBooks(data), one_book = Book.getAllBooks())
+    return render_template("authors(one).html", one_author = Author.getAuthorsAndBooks(data), one_book = Book.getNotFavoritesBooks(data))
+
 
 
 ### ROUTE TO ADD FAVORITES BOOK/AUTHOR RELATION (WORKING)
@@ -46,3 +54,11 @@ def addAuthorsFavorites():
     Favorite.createFavorites(request.form)
     pprint(request.form)
     return redirect(f'/authors/{author_id}')
+
+
+
+### DINO GAME CATCH ALL (WORKING)
+@app.route('/', defaults = {'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    return render_template("dinosaur.html")

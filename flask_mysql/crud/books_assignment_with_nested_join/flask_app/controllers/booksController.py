@@ -19,22 +19,41 @@ def createBook():
     return redirect(f'/books')
 
 
-### ROUTE TO VIEW BOOK PAGE BY "ID" (WORKING)
-@app.route('/books/<int:id>')
-def showBooksFavorites(id):
-    data = {
-    "id" : id
-    }
-    return render_template("books(one).html", one_author = Author.getAllAuthors(), one_book = Book.getBooksWithAuthors(data))
-
-
-# ### ROUTE TO VIEW BOOK PAGE BY "ID" (testing TO MAKE NOT FAVS WORK)
+# ### ROUTE TO VIEW BOOK PAGE BY "ID" (WORKING)   DROP DOWN USES ALL OPTIONS
 # @app.route('/books/<int:id>')
-# def showNonFavoriteBooks(id):
+# def showBooksFavorites(id):
 #     data = {
 #     "id" : id
 #     }
-#     return render_template("books(one).html", one_author = Author.getAllAuthors(), one_book = Book.getNotFavoritesBooks(data))
+#     return render_template("books(one).html", one_author = Author.getAllAuthors(), one_book = Book.getBooksWithAuthors(data))
+
+
+
+
+
+### ROUTE TO VIEW BOOK PAGE BY "ID" -- NESTED JOIN MAKES DROP DOWN ONLY USE UNUSED OPTIONS!!!!
+@app.route('/books/<int:id>')
+def showNonFavoriteBooks(id):
+    data = {
+    "id" : id
+    }
+    return render_template("books(one).html", one_author = Author.getNotFavoritesAuthors(data), one_book = Book.getBooksWithAuthors(data))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ###  (WORKING)
@@ -50,9 +69,3 @@ def addBooksFavorites():
     pprint(request.form)
     return redirect(f'/books/{book_id}')
 
-
-### DINO GAME CATCH ALL (WORKING)
-@app.route('/', defaults = {'path': ''})
-@app.route('/<path:path>')
-def catch_all(path):
-    return render_template("dinosaur.html")
