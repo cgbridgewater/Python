@@ -1,10 +1,10 @@
 from pprint import pprint
+from unittest import result
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models import author
 
 
-
-### Book CLASS
+### BOOK Constructor
 class Book:
     def __init__(self,data):
         self.id = data['id']
@@ -16,9 +16,7 @@ class Book:
         self.authors = []
 
 
-
-
-### CREATE AND SAVE NEW BOOK (Testing)
+### CREATE AND SAVE NEW BOOK (WORKING)
     @classmethod
     def createBook(cls,data):
         query = "INSERT INTO books (title , num_of_pages, created_at, updated_at) VALUES (%(title)s , %(num_of_pages)s, NOW() , NOW());"
@@ -39,10 +37,7 @@ class Book:
         return books
 
 
-
-
-
-### (TESTING) 
+### (WORKING) 
     @classmethod
     def getBooksWithAuthors(cls,data):
         query = "SELECT * FROM books LEFT JOIN favorites ON favorites.book_id = books.id LEFT Join authors ON favorites.author_id = authors.id WHERE books.id = %(id)s;"
@@ -61,57 +56,23 @@ class Book:
         return one_book
 
 
-    @classmethod
-    def booksJoin(cls):
-        query = "SELECT * FROM books LEFT JOIN favorites ON favorites.book_id = books.id;"
-        pprint('JOINING BOOKS AND FAVS')
-        pprint(query)
-        return connectToMySQL('books_schema').query_db(query)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# ### GET USER BY ID (WORKING)
+# ### (WORKING)
 #     @classmethod
-#     def get_one_user(cls,data):
-#         query = "SELECT * FROM users WHERE id = %(id)s;"
-#         result = connectToMySQL('users_cr').query_db(query,data)
-#         if len(result) == 0: #if no users found, return an empty list
-#             return None
-#         else: # if at least one user found
-#             return cls(result[0])
+#     def booksJoin(cls):
+#         query = "SELECT * FROM books LEFT JOIN favorites ON favorites.book_id = books.id;"
+#         pprint('JOINING BOOKS AND FAVS')
+#         pprint(query)
+#         return connectToMySQL('books_schema').query_db(query)
 
 
-# ### UPDATE USER BY ID (WORKING)
-#     @classmethod
-#     def updateUser(cls,data):
-#         query = "UPDATE users SET first_name = %(first_name)s, last_name = %(last_name)s, email = %(email)s WHERE id = %(id)s;"
-#         return connectToMySQL('users_cr').query_db(query,data)
-
-
-
-# ### DELETE USER BY ID (WORKING)
-#     @classmethod
-#     def deleteUser(cls,data):
-#         query = "DELETE FROM users WHERE id = %(id)s;"
-#         return connectToMySQL('users_cr').query_db(query,data) 
+### (TESTING)
+    # @classmethod
+    # def getNotFavoritesBooks(cls,data): 
+    #     query = "SELECT * FROM books WHERE books.id NOT IN ( SELECT book_id FROM favorites WHERE author_id = %(id)s);"
+    #     results = connectToMySQL('books_schema').query_db(query,data)
+    #     pprint("NOT FAVORITED BOOK LIST")
+    #     pprint(results)
+    #     nonFavBooks = []
+    #     for b in results:
+    #         nonFavBooks.append(cls(b))
+    #     return nonFavBooks

@@ -6,11 +6,11 @@ from flask_app.models.author import Author
 from flask_app.models.favorite import Favorite
 
 
-
 ### WORKING
 @app.route('/')
 def index():
     return redirect('/authors')
+
 
 ### WORKING
 @app.route('/authors')
@@ -46,5 +46,3 @@ def addAuthorsFavorites():
     Favorite.createFavorites(request.form)
     pprint(request.form)
     return redirect(f'/authors/{author_id}')
-
-

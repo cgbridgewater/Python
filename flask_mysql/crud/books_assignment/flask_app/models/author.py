@@ -3,8 +3,7 @@ from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models import book
 
 
-
-### AUTHOR CLASS (WORKING)
+### AUTHOR CONSTRUCTOR (WORKING)
 class Author:
     def __init__(self,data):
         self.id = data['id']
@@ -13,9 +12,6 @@ class Author:
         self.updated_at = data['updated_at']
         # self.book_id = data['LOOK HERE']
         self.books = []
-
-
-
 
 
 ### CREATE AND SAVE NEW AUTHOR (WORKING)
@@ -39,10 +35,7 @@ class Author:
         return authors
 
 
-
-
-
-### (TESTING) Returns a good result i think??? (doesnt crash page but havent passed data yet)
+### (WORKING)
     @classmethod
     def getAuthorsAndBooks(cls,data):
         query = "SELECT * FROM authors LEFT JOIN favorites ON favorites.author_id = authors.id LEFT Join books ON favorites.book_id = books.id WHERE authors.id = %(id)s;"
@@ -59,51 +52,5 @@ class Author:
                 "updated_at" : one_book["books.updated_at"],
                 "author_id" : one_book["author_id"]
             }
-
             one_author.books.append( book.Book( book_data))
         return one_author
-
-
-
-    @classmethod
-    def getTheBooks(cls):
-        query = "SELECT * FROM books;"
-        results = connectToMySQL('books_schema').query_db(query)
-        print(results)
-        books = []
-        for b in results:
-            books.append(cls(b))
-        return books
-
-
-
-
-
-
-
-
-
-# ### GET USER BY ID (WORKING)
-#     @classmethod
-#     def get_one_user(cls,data):
-#         query = "SELECT * FROM users WHERE id = %(id)s;"
-#         result = connectToMySQL('users_cr').query_db(query,data)
-#         if len(result) == 0: #if no users found, return an empty list
-#             return None
-#         else: # if at least one user found
-#             return cls(result[0])
-
-
-# ### UPDATE USER BY ID (WORKING)
-#     @classmethod
-#     def updateUser(cls,data):
-#         query = "UPDATE users SET first_name = %(first_name)s, last_name = %(last_name)s, email = %(email)s WHERE id = %(id)s;"
-#         return connectToMySQL('users_cr').query_db(query,data)
-
-
-
-# ### DELETE USER BY ID (WORKING)
-#     @classmethod
-#     def deleteUser(cls,data):
-#         query = "DELETE FROM users WHERE id = %(id)s;"
-#         return connectToMySQL('users_cr').query_db(query,data) 
