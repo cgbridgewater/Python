@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index Page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <h1 class="ms-5 mt-5 ps-5">REGISTRATION AND LOGIN PAGE</h1>
+    <div class="row p-5">
+        <!-- left column -->
+        <div class="col-4 ms-5">
+            <!-- container -->
+            <div class=" p-1 border border-dark border-2 bg-secondary bg-gradiant bg-opacity-75 rounded-3">
+                {% with messages = get_flashed_messages() %}
+                <!-- declare a variable called messages -->
+                {% if messages %}
+                <!-- check if there are any messages -->
+                {% for message in messages %}
+                <!-- loop through the messages -->
+                <p>{{message}}</p> <!-- display each message in a paragraph tag -->
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+
+                <h2 class="text-center">REGISTER</h2>
+                <form action="/register" method="post">
+                    <!-- firstname -->
+                    <div>
+                        <input name="first_name" type="text" class="form-control m-1" placeholder="First Name" value="{{session['first_name']}}">
+                    </div>
+                    <!-- last name -->
+                    <div>
+                        <input name="last_name" type="text" class="form-control m-1" placeholder="Last Name" value="{{session['last_name']}}">
+                    </div>
+                    <!-- email -->
+                    <div>
+                        <input name="email" type="email.com" class="form-control m-1" placeholder="Email" value="{{session['email']}}">
+                    </div>
+                    <!-- password -->
+                    <div>
+                        <input name="password" type="password" class="form-control m-1" placeholder="Password">
+                    </div>
+                    <!-- cofirm password -->
+                    <div>
+                        <input name="confirm_password" type="password" class="form-control m-1" placeholder="Confirm Password">
+                    </div>
+                    <!-- button -->
+                    <button type="submit" class="text-light btn btn-primary opacity-75 m-1 ms-5">Submit</button>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- right column -->
+        <div class="col-4 ms-5">
+            <!-- container -->
+            <div class=" p-1 border border-dark border-2 bg-secondary bg-gradiant bg-opacity-75 rounded-3">
+                {% with messages = get_flashed_messages() %}
+                <!-- declare a variable called messages -->
+                {% if messages %}
+                <!-- check if there are any messages -->
+                {% for message in messages %}
+                <!-- loop through the messages -->
+                <p>{{message}}</p> <!-- display each message in a paragraph tag -->
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+
+                <h2 class="text-center">LOG IN</h2>
+                <form action="/login" method="post">
+                    <!-- email -->
+                    <div>
+                        <input name="email" type="email" class="form-control m-1" placeholder="Email">
+                    </div>
+                    <!-- password -->
+                    <div>
+                        <input name="password" type="password" class="form-control m-1" placeholder="Password">
+                    </div>
+                    <!-- button -->
+                    <button type="submit" class="text-light btn btn-primary opacity-75 m-1 ms-5">Submit</button>
+                </form>
+            </div>
+
+        </div>
+
+
+
+
+
+    </div>
+
+
+
+
+
+</body>
+
+</html>

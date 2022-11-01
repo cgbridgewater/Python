@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style4.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<!-- body -->
+<body class="body">
+    <!-- nav bar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <a id="navText" class="navbar-brand fs-2">Edit User - {{user.id}}</a>
+            <button class="input"><a id="link" href="/users">Return To Home Page</a></button>
+        </div>
+    </nav>
+    <!-- main content box -->
+    <main>
+        <!-- wrapper -->
+        <div class="wrapper">
+            <!-- form  -->
+            <form action="/users/updating/{{user.id}}" method = "POST">
+                <div><!-- hidden element for ID number of user --> 
+                    <input type="hidden" name="id" class="form-control" value ="{{user.id}}">
+                </div>
+                <div class="text-start" >
+                    <label for="first_name" class="text-sm-start">First Name:</label>
+                </div>
+                <div>
+                    <input type="text" name="first_name" class="form-control shadow-sm rounded" value ="{{user.first_name}}">
+                </div>
+                <div class="text-start" >
+                    <label for="last_name" class="text-start" >Last Name:</label>
+                </div>
+                <div>
+                    <input type="text" name="last_name" class="form-control shadow-sm rounded" value ="{{user.last_name}}">
+                </div>
+                <div class="text-start">
+                    <label for="email">Email:</label>
+                </div>
+                <div>
+                    <input type="text" name="email" class="form-control shadow-sm rounded" value ="{{user.email}}">
+                </div>
+                <input type="submit" value="Update" class="input" >
+                <!-- button -->
+                <button class="input2 mt-3">
+                <a href="/users/read/{{user.id}}" id="link">Return To User Profile</a>
+                </button><!-- button END -->
+            </form><!-- form END -->
+        </div>
+    </main>
+</body>
+</html>

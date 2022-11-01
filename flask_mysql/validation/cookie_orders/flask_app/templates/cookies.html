@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index Page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+
+<!-- header -->
+<body class="bg-secondary bg-opacity-10">
+    <div class="header bg-secondary bg-opacity-25 bg-gradient p-3">
+        <h1 class="text-center">Cookie Orders</h1>
+    </div>
+
+
+    <div class="container p-2">
+        <!-- secondary header -->
+        <div class="row">
+            <div class="col">
+                <h3>All Orders:</h3>
+            </div>
+            <div class="col">
+                <h3>
+                    <a href="/cookies/new" class="btn btn bg-success border border-1 border-dark" role="button">Add New Order</a>
+                </h3>
+            </div>
+        </div>
+        <!-- table -->
+        <div class="table wrapper">
+            <table class="table table-hover border border-2 border-dark bg-info bg-opacity-10 bg-gradient ">
+                <tr class="m-2">
+                <!-- table headers -->
+                    <th><h3>Customer Name</h3></th>
+                    <th><h3>Cookie Type</h3></th>
+                    <th><h3>Number Of Boxes</h3></th>
+                    <th><h3>Action</h3></th>
+                </tr>
+            <!-- iteration for displaying Order data -->
+                {% for cookie in cookies %}
+                <tr>
+                    <td>{{ cookie.customer_name }}</td>
+                    <td>{{ cookie.cookie_type }}</td>
+                    <td class="text-center">{{ cookie.boxes }}</td>
+                    <td>
+                        <a href="/cookies/edit/{{cookie.id}}" class="btn btn-sm bg-warning border border-1 border-dark" role="button">Edit</a>
+                        <a href="/cookies/delete/{{cookie.id}}" class="btn btn-sm bg-danger border border-1 border-dark" role="button">DELETE ORDER</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</body>
+</html>
