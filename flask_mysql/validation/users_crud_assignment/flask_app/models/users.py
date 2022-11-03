@@ -46,7 +46,7 @@ class User:
         return is_valid ### if you make it this far, is good to go!
 
 
-### GET USER BY EMAIL (WORKING)
+### CHECK FOR EXISTING EMAIL (WORKING)
     @classmethod 
     def email_exists(cls,data):
         query = "SELECT * FROM users WHERE email = %(email)s;"
