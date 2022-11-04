@@ -1,5 +1,5 @@
 from flask_app import app
-from flask_app.controllers import usersController
+from flask_app.controllers import usersController, uiController, friendsController
 
 
 
