@@ -1,7 +1,5 @@
-from sre_parse import SPECIAL_CHARS
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
-from flask_bcrypt import Bcrypt    
 import re
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$') 
 
@@ -28,9 +26,6 @@ class User:
         if len(user['last_name']) < 3: ### last name length check
             flash("Last Name must be at least 3 characters.", "register")
             is_valid = False
-        if len(user['email']) < 3:    ### email length check
-            flash("Email must be a valid email.", "register")
-            is_valid = False
         if len(user['password']) < 3: ### password length check
             flash("Password must be a valid password.", "register")
             is_valid = False
@@ -42,6 +37,9 @@ class User:
             is_valid = False
         if not EMAIL_REGEX.match(user['email']):  ### checks email formating
             flash("Invalid email address!", "register")
+            is_valid = False
+        if len(user['email']) < 3:    ### email length check
+            flash("Email must be a valid email.", "register")
             is_valid = False
         if User.email_exists(user):  ### check user email is origional
             flash("This email is already taken!", "register")
@@ -62,29 +60,36 @@ class User:
         return is_valid ### if you make it this far, is good to go!
 
 
+### UPDATE VALIDATIONS
+    @staticmethod
+    def validate_update(user):
+        is_valid = True # we assume this is true
+        if len(user['first_name']) < 3: ### password length check
+            flash("First name must be at least 3 charactors long.", "update")
+            is_valid = False
+        if len(user['last_name']) < 3: ### password length check
+            flash("Last name must be at least 3 charactors long.", "update")
+            is_valid = False
+        if not EMAIL_REGEX.match(user['email']):  ### checks email formating
+            flash("Invalid email address!", "update")
+            is_valid = False
+        # if User.email_exists(user):  ### check user email is origional
+        #     flash("This email is already taken!", "update")
+        #     is_valid = False 
+        return is_valid ### if you make it this far, is good to go!
+
 ### CHECK FOR EXISTING EMAIL (WORKING)
     @classmethod 
     def email_exists(cls,data):
         query = "SELECT * FROM users WHERE email = %(email)s;"
-        result = connectToMySQL('login_registration_schema').query_db(query,data) 
-        if len(result) < 0: #if no users found, return an empty list
-            return None
-        else: # if at least one user found
-            return cls(result[0])
-
-
-### LOOK UP USER BY EMAIL
-    @classmethod
-    def get_by_email(cls,data):
-        query = "SELECT * FROM users WHERE email = %(email)s;"
-        result = connectToMySQL("login_registration_scema").query_db(query,data)
-        #didn't find a matching user
+        result = connectToMySQL("login_registration_schema").query_db(query,data)
         if len(result) < 1:
-            return False
+            return False   #didn't find a matching user
         return cls(result[0])
 
 
-### CREATE AND SAVE NEW USER (testing)
+
+### CREATE AND SAVE NEW USER (WORKING)
     @classmethod
     def save(cls,data):
         query = "INSERT INTO users (first_name, last_name, email, password) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s );"
@@ -110,10 +115,9 @@ class User:
 
 
 
-
 ### UPDATE USER BY ID (WORKING)
     @classmethod
-    def updateUser(cls,data):
+    def update_user_by_id(cls,data):
         query = "UPDATE users SET first_name = %(first_name)s, last_name = %(last_name)s, email = %(email)s WHERE id = %(id)s;"
         return connectToMySQL('login_registration_schema').query_db(query,data)
 
@@ -124,15 +128,16 @@ class User:
 
 #### check all below and save this just in case all users needed!!
 
-# ### GET ALL USERS (testing)
-#     @classmethod
-#     def get_all(cls):
-#         query = "SELECT * FROM users;"
-#         results = connectToMySQL('login_registartion_schema').query_db(query)
-#         users = []
-#         for i in results:
-#             users.append(cls(i))
-#         return users
+### GET FRIENDS (testing)
+    @classmethod
+    def get_friends(cls,data):
+        query = "SELECT * FROM users WHERE id <> %(id)s;"
+        results = connectToMySQL('login_registration_schema').query_db(query,data)
+        print(results)
+        users = []
+        for i in results:
+            users.append(cls(i))
+        return users
 
 
 
