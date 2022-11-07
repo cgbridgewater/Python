@@ -39,7 +39,7 @@ def edit_user():
     data ={
         'id': session['user_id']
     }
-    return render_template("edit.html", user = User.get_user_by_id(data))
+    return render_template("edit.html", user = User.get_one(data))
 
 
 ### ROUTE TO PROCESS USER UPDATE FORM (WORKING)

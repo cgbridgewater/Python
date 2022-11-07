@@ -47,8 +47,8 @@ class Message:
     @classmethod
     def save(cls,data):
         query = '''
-        INSERT INTO messages (content, sender_id,receiver_id) 
-        VALUES ( %(content)s, %(sender_id)s, %(receiver_id)s,);
+        INSERT INTO messages ( content, sender_id , receiver_id ) 
+        VALUES ( %(content)s , %(sender_id)s , %(receiver_id)s );
         '''
         return connectToMySQL("private_wall").query_db(query,data)
 
