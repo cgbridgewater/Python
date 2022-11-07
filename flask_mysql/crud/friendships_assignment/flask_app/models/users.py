@@ -45,21 +45,6 @@ class User:
         return result 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### GET USER BY ID (testing)
     @classmethod
     def get_one_user(cls,data):
