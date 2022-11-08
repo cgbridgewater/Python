@@ -5,14 +5,10 @@ from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
 
-
-
 ### HOME ROUTE
 @app.route('/')
 def index():
     return render_template("login.html")
-
-
 
 
 ### ROUTE FOR REGISTRATION
@@ -40,8 +36,6 @@ def register():
     return redirect("/dashboard")    ### go to dashboard if no validation errors
 
 
-
-
 ### ROUTE FOR LOGIN
 @app.route('/login', methods= ['POST'])
 def login():
@@ -63,15 +57,11 @@ def login():
     return redirect("/dashboard")   ### else no validation errors:
 
 
-
-
 ### ROUTE FOR LOGOUT 
 @app.route('/logout')
 def logout():
     session.clear()
     return redirect("/")
-
-
 
 
 ### CATCH ALL DINO GAME  (WORKING)

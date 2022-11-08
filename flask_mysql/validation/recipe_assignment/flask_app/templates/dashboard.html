@@ -1,56 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index Page</title>
+    <title>Recipe Share</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
-<body class="bg-secondary bg-gradient bg-opacity-10">
 
+<body class="bg-secondary bg-gradient bg-opacity-10">
     <!-- main wrapper -->
     <main>
-
         <!-- nav bar -->
-        <nav class="bg-primary bg-gradient bg-opacity-25 p-3">
-            <h1 class="text-center fs-2">Welcome To {{user.first_name}} {{user.last_name}}'s Dashbaord</h1>
+        <nav class="bg-primary bg-gradient bg-opacity-25 p-2 ps-4">
+            <h1 class="text-start">Welcome, {{ user.first_name }}</h1>
         </nav>
-
+        <div class="row bg-primary bg-opacity-25 p-1 ps-5">
+            <div class="col-5">
+                <h4>All Posted Recipes:</h4>
+            </div>
+            <div class="col-1">
+                <a href="/recipe/create" class="p-2 border border-2 border-dark rounded bg-success btn-sm text-decoration-none text-light">Create</a>
+            </div>
+            <div class="col-1">
+                <a href="/dashboard/edit" class="ms-2 p-2 border border-2 border-dark rounded bg-warning btn-sm text-decoration-none text-light">Edit</a>
+            </div>
+            <div class="col-1">
+                <a href="/logout" class="p-2 border border-2 border-dark rounded bg-danger btn-sm text-decoration-none text-light">LogOut</a>
+            </div>
+        </div>
         <!-- main wrapper -->
-        <div class="wrapper ms-3">
-
+        <div class="wrapper ">
             <!-- table -->
-            <table class="table table-hover">
+            <table class="table table-bordered table-hover ms-5 border border-2 border-dark w-75 ">
                 <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Member Since</th>
-                    <th>Last Updated On</th>
+                    <th>Recipe Name</th>
+                    <th>Ready In Under 30?</th>
+                    <th>Posted By</th>
+                    <th>Date Made</th>
                     <th>Actions</th>
                 </tr>
                 <tr>
-                    <td>{{ user.first_name }} {{ user.last_name }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.created_at.strftime("%B %e, %Y") }}</td>
-                    <td>{{ user.updated_at.strftime("%B %e, %Y %I:%M %p") }}</td>
+                <!-- loop through recipes -->
+                {% for r in recipes %}
+                    <td> {{ r.name }} </td>
+                    <td> {{ r.under_30 }} </td>
+                    <td> {{ r.creator.first_name }}  {{ r.creator.last_name  }}</td>
+                    <td> {{ r.date_made.strftime("%B %e, %Y") }} </td>
                     <td>
-                        <button class="bg-primary m-1"><a href="/dashboard/edit"
-                                class="text-decoration-none text-light">Update</a></button>
-                        <button class="bg-warning m-1"><a href="/logout" class="text-decoration-none text-light">Log
-                                Out</a></button>
-                        <button class="bg-danger m-1"><a href="/dashboard/delete"
-                                class="text-decoration-none text-light">Delete Profile</a></button>
-                        <button class="bg-success m-1"><a href="/dashboard/friends"
-                                class="text-decoration-none text-light">See All Friends</a></button>
+                        <!-- view recipe button -->
+                        <button class="bg-success m-1"><a href="/recipe/view/{{r.id}}/{{r.creator.id}}"
+                        class="text-decoration-none text-light">View recipe</a></button>
+                        <!-- loop to control 'in session view' -->
+                        {% if r.creator.id == session.user_id %}
+                        <!-- edit recipe button -->
+                        <button class="bg-primary m-1"><a href="/recipe/edit/{{r.id}}"
+                        class="text-decoration-none text-light">Edit</a></button>
+                        <!-- delete recipe button -->
+                        <button class="bg-danger m-1 me-0"><a href="/recipe/delete/{{r.id}}"
+                        class="text-decoration-none text-light">Delete</a></button>
+                        {% endif %}
                     </td>
                 </tr>
+                {% endfor %}
             </table><!-- Table END -->
         </div>
     </main>
 </body>
-
 </html>
