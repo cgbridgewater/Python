@@ -5,17 +5,13 @@ from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
 
-
-
 ### HOME ROUTE
 @app.route('/')
 def index():
     return render_template("login.html")
 
 
-
-
-### ROUTE FOR REGISTRATION
+### ROUTE FOR REGISTRATION (CREATE)
 @app.route('/register', methods= ['POST'])
 def register():
     # We call the staticmethod on User model to validate
@@ -32,7 +28,7 @@ def register():
         "email": request.form['email'],
         "password" : pw_hash
     }
-    user_id = User.save(data) ### save user
+    user_id = User.save(data)        ### save user
     session.pop("first_name", None)  ### clear form place holder sessions
     session.pop("last_name", None)   ### clear form place holder sessions
     session.pop("email", None)       ### clear form place holder sessions
@@ -40,12 +36,9 @@ def register():
     return redirect("/dashboard")    ### go to dashboard if no validation errors
 
 
-
-
 ### ROUTE FOR LOGIN
 @app.route('/login', methods= ['POST'])
-def login():
-    # We call the staticmethod on User model to validate
+def login():     # We call the staticmethod on User model to validate
     session["email2"] = request.form["email"] ### HOLDING FORM DATA FOR RESUBMIT
     data = { "email" : request.form["email"] } ###data list for checking email
     user_in_db = User.email_exists(data) ###email exists in db check
@@ -55,14 +48,11 @@ def login():
     if not bcrypt.check_password_hash(user_in_db.password, request.form['password']): ###check hashed pw
         flash("Invalid Email/Password", "login")
         return redirect("/") ### redirect if fails
-    if not User.validate_login(request.form):
-    # if there are errors:
-        return redirect('/') # redirect to the route where the user form is rendered.
+    if not User.validate_login(request.form):    # if there are errors:
+        return redirect('/')             ### redirect to the route where the user form is rendered.
     session["user_id"] = user_in_db.id   ### create session to test logged in
-    session.pop("email2", None)    ### pop log in session
-    return redirect("/dashboard")   ### else no validation errors:
-
-
+    session.pop("email2", None)          ### pop log in session
+    return redirect("/dashboard")        ### else no validation errors:
 
 
 ### ROUTE FOR LOGOUT 
@@ -70,8 +60,6 @@ def login():
 def logout():
     session.clear()
     return redirect("/")
-
-
 
 
 ### CATCH ALL DINO GAME  (WORKING)

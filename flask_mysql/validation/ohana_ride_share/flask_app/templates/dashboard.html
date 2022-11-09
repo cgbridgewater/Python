@@ -5,50 +5,90 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index Page</title>
+    <title>Update Ride Details</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
-<body class="bg-secondary bg-gradient bg-opacity-10">
+<body class="bg-secondary bg-gradient bg-opacity-25">
 
     <!-- main wrapper -->
     <main>
-
+        
         <!-- nav bar -->
-        <nav class="bg-primary bg-gradient bg-opacity-25 p-3">
-            <h1 class="text-center fs-2">Welcome To {{user.first_name}} {{user.last_name}}'s Dashbaord</h1>
+        <nav class="navbar mb-5 bg-primary bg-gradient bg-opacity-25 p-2 ps-4">
+            <div class="container-fluid">
+                <div class="navbar-brand fw-semibold fs-2 ">Welcome, {{ user.first_name }}</div>
+                <div class="d-flex ">
+                    <button class="rounded bg-info bg-opacity-50"><a href="/ride/new"  class="text-decoration-none text-dark ">Request A Ride</a></button>
+                    <button class="ms-1 rounded me-2 bg-danger"><a href="/logout" class="text-decoration-none  text-dark">Logout</a></button>
+                </div>
+            </div>
         </nav>
 
         <!-- main wrapper -->
-        <div class="wrapper ms-3">
+        <div class="d-flex justify-content-around">
 
-            <!-- table -->
-            <table class="table table-hover">
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Member Since</th>
-                    <th>Last Updated On</th>
-                    <th>Actions</th>
-                </tr>
-                <tr>
-                    <td>{{ user.first_name }} {{ user.last_name }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.created_at.strftime("%B %e, %Y") }}</td>
-                    <td>{{ user.updated_at.strftime("%B %e, %Y %I:%M %p") }}</td>
-                    <td>
-                        <button class="bg-primary m-1"><a href="/dashboard/edit"
-                                class="text-decoration-none text-light">Update</a></button>
-                        <button class="bg-warning m-1"><a href="/logout" class="text-decoration-none text-light">Log
-                                Out</a></button>
-                        <button class="bg-danger m-1"><a href="/dashboard/delete"
-                                class="text-decoration-none text-light">Delete Profile</a></button>
-                        <button class="bg-success m-1"><a href="/dashboard/friends"
-                                class="text-decoration-none text-light">See All Friends</a></button>
-                    </td>
-                </tr>
-            </table><!-- Table END -->
+            <!-- left column -->
+            <div class="col-5 bg-primary bg-opacity-25 rounded border border-1 border-dark">
+                <h2 class="text-center">Rideshare Request</h2>
+                <hr class="border-primary border border-2">
+
+                <!-- iterate ride share -->
+                {% for ride in rideshares %}
+
+                    <!-- if no driver add to list -->
+                    {% if ride.driver.id == None %}    
+                    <div class="card bg-primary bg-gradient bg-opacity-25 m-3 p-2 ">
+                        <div class="card-body">
+
+                            <!-- if rider id is not session id use rider name -->
+                            {% if ride.rider.id != session['user_id'] %} 
+                            <p class="card-title mt-0 mb-0 ">Rider : {{ ride.rider.first_name }} </p>
+                            <p class="card-text mt-0 mb-0 ">Destination : {{ ride.destination }} </p>
+                            <p>When Needed : {{ ride.date.strftime("%B %e, %Y") }}</p>
+                            <a href="ride/drive/{{ride.id}}">I can drive!</a>
+
+                            <!-- else use "you" for name -->
+                            {% else %}
+                        <p class="card-title mt-0 mb-0 ">Rider : You </p>
+                        <p class="card-text mt-0 mb-0 ">Desitnation : {{ ride.destination }} </p>
+                        <p>When Needed : {{ ride.date.strftime("%B %e, %Y") }}</p>
+                        <a href="ride/delete/{{ride.id}}">DELETE</a>
+                        {% endif %} 
+                    </div>
+                </div> 
+                    {% endif %}    
+                {% endfor %}
+            </div>
+            
+            <!-- right column -->
+            <div class="col-5 bg-primary bg-opacity-25 rounded border border-1 border-dark">
+                <h2 class="text-center">Booked Rideshares</h2>
+                <hr class="border-primary border border-2">
+    
+                <!-- iterate ride share -->
+                {% for ride in rideshares %}
+
+                    <!-- if driver exists add to list -->
+                    {% if ride.driver.id != None %} 
+                <div class="card bg-primary bg-gradient bg-opacity-25 m-3 p-2 ">
+                    <div class="card-body">
+
+                        <!-- if driver id not session id use driver name-->
+                        {% if ride.driver.id != session['user_id'] %} 
+                        <p class="card-title mt-0 mb-0 "> {{ ride.driver.first_name }} is driving {{ ride.rider.first_name }} to {{ ride.destination }} on {{ ride.date.strftime("%B %e, %Y") }}  </p>
+
+                        <!-- if driver id not session id use driver name-->
+                        {% else %}
+                        <p class="card-title mt-0 mb-0 ">You are driving {{ ride.rider.first_name }} to {{ ride.destination }} on {{ ride.date.strftime("%B %e, %Y") }}  </p>
+                        <a href="ride/details/{{ride.id}}">Details</a> | <a href="ride/cancel/{{ride.id}}">Cancel</a>
+                        {% endif %} 
+                    </div>
+                </div> 
+                    {% endif %}   
+                {% endfor %}
+            </div>
         </div>
     </main>
 </body>
