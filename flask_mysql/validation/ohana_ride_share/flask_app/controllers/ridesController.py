@@ -79,7 +79,7 @@ def cancel_ride(id):
         # 'driver_id' : "NULL"
     }
     Ride.cancel_ride(data)
-    return redirect("/dashboard" )
+    return redirect("/dashboard")
 
 
 ### works
@@ -105,6 +105,17 @@ def ride_update():
     session.pop('detials', None)
     session.pop('id', None)
     return redirect("/dashboard")
+
+### RIDE DETAILS
+@app.route('/ride/details/<int:id>')
+def ride_details(id):
+    if 'user_id' not in session:
+        msg = "you must be logged in!"
+        return redirect('/logout')
+    data = {
+        'id' : id
+    }
+    return render_template("ride_details.html", rideshares = Ride.get_all_by_ride_id(data) )
 
 
     ### ROUTE TO DELETE RIDE BY RIDE_ID (WORKING)

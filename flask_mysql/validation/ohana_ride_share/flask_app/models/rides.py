@@ -88,14 +88,6 @@ class Ride:
         return connectToMySQL('ohana_schema').query_db(query,data)
 
 
-### DELETE RIDE BY ID (WORKING)
-    @classmethod
-    def delete_ride(cls,data):
-        query = "DELETE FROM rides WHERE id = %(id)s;"
-        result= connectToMySQL('ohana_schema').query_db(query,data) 
-        return  result
-
-
 ### UPDATE RIDE BY ID (WORKING)
     @classmethod
     def accept_ride(cls,data):
@@ -154,3 +146,60 @@ class Ride:
             one_ride.driver = driver 
             all_rides.append(one_ride) 
         return all_rides
+
+
+### GET EVERYTHING BY RIDE ID
+    @classmethod
+    def get_all_by_ride_id(cls,data):
+        query = '''
+        SELECT * FROM rides 
+        LEFT JOIN users AS rider ON rider.id = rides.rider_id 
+        LEFT JOIN users AS driver ON driver.id = rides.driver_id WHERE rides.id = %(id)s ;
+        '''
+        results = connectToMySQL('ohana_schema').query_db(query, data)
+        all_rides = []
+        print(results)
+        print("A")
+        for row in results:# Create a Tweet class instance from the information from each db row
+            for key in row:
+                print(key,"\t\t",row[key])
+            one_ride = cls(row)# Prepare to make a User class instance, looking at the class in models/user.py
+            ### rider
+            rider_data = { # Any fields that are used in BOTH tables will have their name changed, which depends on the order you put them in the JOIN query, use a print statement in your classmethod to show this.
+                "id": row['id'], 
+                "first_name": row['first_name'],
+                "last_name": row['last_name'],
+                "email": row['email'],
+                "password": row['password'],
+                "created_at": row['created_at'],
+                "updated_at": row['updated_at'],
+            }
+            ### driver
+            driver_data = { # Any fields that are used in BOTH tables will have their name changed, which depends on the order you put them in the JOIN query, use a print statement in your classmethod to show this.
+                    "id": row['driver.id'], 
+                    "first_name": row['driver.first_name'],
+                    "last_name": row['driver.last_name'],
+                    "email": row['driver.email'],
+                    "password": row['driver.password'],
+                    "created_at": row['driver.created_at'],
+                    "updated_at": row['driver.updated_at'],
+            }
+            ### rider
+            rider = users.User(rider_data)
+            one_ride.rider = rider       
+            ### driver
+            driver = users.User(driver_data)
+            one_ride.driver = driver 
+            all_rides.append(one_ride) 
+        return all_rides
+
+
+
+
+
+### DELETE RIDE BY ID (WORKING)
+    @classmethod
+    def delete_ride(cls,data):
+        query = "DELETE FROM rides WHERE id = %(id)s;"
+        result= connectToMySQL('ohana_schema').query_db(query,data) 
+        return  result

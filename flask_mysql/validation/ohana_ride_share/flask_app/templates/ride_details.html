@@ -8,52 +8,85 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
+<body>
+    <main class="bg-secondary bg-opacity-10">
 
-<h1>testing details page!!!!!!!!!</h1>
-<body class="bg-secondary bg-opacity-10">
-    <div class="header bg-primary bg-opacity-25 bg-gradient p-3">
-        <h1 class="text-center fs-2">Update User Information</h1>
-    </div>
-    <div class="wrapper ">
-        <!-- edit form start-->
-        <form class="border border-2 border-dark rounded rounded-2 w-50 m-auto mt-5 p-3 bg-gradient bg-dark bg-opacity-10 " action="/dashboard/editing" method="POST">
-            
-        <!-- validation error message -->
-            {% with messages = get_flashed_messages(category_filter=["update"]) %}
-                <!-- declare a variable called messages -->
-                {% if messages %}
-                    <!-- check if there are any messages -->
-                    {% for message in messages %}
-                        <!-- loop through the messages -->
-                        <p>{{message}}</p> <!-- display each message in a paragraph tag -->
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-            <div class="text-center m-1">
-                <!-- hidden id -->
-                <input type="hidden" name="id" value="{{user.id}}">
-                <!-- customer name -->
-                <label for="first_name">Update Customer Name</label>
-                <input type="text" name="first_name" placeholder="First Name" value="{{user.first_name}}" >
+
+
+        <!-- nav bar -->
+        <nav class="navbar mb-3 bg-primary bg-gradient bg-opacity-25 p-2 ps-5 pe-5">
+            <div class="container-fluid">
+                <div class="navbar-brand fw-semibold fs-2">Ride Details</div>
+                <div class="d-flex ">
+                    <button class="rounded bg-info bg-opacity-50"><a href="/dashboard"  class="text-decoration-none text-dark ">Go Home</a></button>
+                    <button class="ms-1 rounded me-2 bg-danger"><a href="/logout" class="text-decoration-none  text-dark">Logout</a></button>
+                </div>
             </div>
-            <div class="text-center m-1">
-                <!-- cookie type -->
-                <label for="last_name">Update Last Name</label>
-                <input type="text" name="last_name" placeholder="Last Name" value="{{user.last_name}}" >
+        </nav>
+
+        <!-- wrapper -->
+        <div class="wrapper w-50 m-auto p-3 border border-1 border-dark rounded bg-dark bg-gradient bg-opacity-25 ">
+            {% for ride in rideshares %}
+            <h2>Ready for your trip to - {{ ride.destination }} ?</h2>
+                <div class=" container text-center ">
+                    <div class="row -1 justify-content-around">
+                        <div class="col-6 text-start">
+                            Who's Driving?
+                        </div>
+                        <div class="col-6 text-start">
+                            {{ ride.driver.first_name}}
+                        </div>
+                        <div class="col-6 text-start">
+                            Who's Coming Along?
+                        </div>
+                        <div class="col-6 text-start">
+                            {{ ride.rider.first_name }}
+                        </div>
+                        <div class="col-6 text-start">
+                            Date : 
+                        </div>
+                        <div class="col-6 text-start">
+                            {{ ride.date.strftime("%B %e, %Y") }}
+                        </div>
+                        <div class="col-6 text-start">
+                            Pick-Up Location : 
+                        </div>
+                        <div class="col-6 text-start">
+                            {{ ride.pick_up }}
+                        </div>
+                        <div class="col-6 text-start">
+                            Details : 
+                        </div>
+                        <div class="col-6 text-start">
+                            {{ ride.details }}
+                        </div>
+                    </div>
+                    <a href="/ride/update/{{ride.id}}"  role="button">Edit</a> | <a href="/ride/delete/{{ride.id}}" >Delete</a>
+                </div>
             </div>
-            <div class="text-center m-1">
-                <!-- number of boxes -->
-                <label for="email">Update Email</label>
-                <input type="email" name="email" placeholder="email" value="{{user.email}}">
-            </div>  
-            <div class="text-center">
-                <!-- submit button -->
-                <a href="/dashboard" class="btn btn-sm bg-success border border-1 border-dark" role="button">Return To Dash</a>
-                <input class="btn btn-sm bg-warning border border-1 border-dark" type="submit" value="Update">
-                <a href="/dashboard/delete" class="btn btn-sm bg-danger border border-1 border-dark" role="button">Delete Profile</a>
-            </div>
-        </form>
-    </div>
-    
+            <div class=" m-5 border-top border-dark"></div>
+            <!-- comment box -->
+            <div class="comment box m-auto border border-dark rounded w-50 bg-primary bg-gradient bg-opacity-10"> 
+                <div><h4 class="ms-5 p-2">Ride messages:</h4></div>
+                <div>
+                    <!-- make this actually work!!!!! -->
+                    <p class="ms-5">{{ride.driver.first_name}} says:  </p> 
+                    <p class="text-center">"On My Way!!"</p>
+                    <p class="ms-5">{{ride.rider.first_name}} says:  </p> 
+                    <p class="text-center">"Great, I'm out front!"</p>
+                </div>
+                
+                <a href="/ride/delete/">delete</a>
+
+                {% endfor %}
+            <form  action="/ride/comment/"></form>
+                <input type="hidden" name="ride_id"> {{rideshares_id}}
+                <textarea class=" ms-5" name="comment" placeholder="Need to send a message.....?" cols="30" rows="4"></textarea>
+                <br>
+                <input class="ms-5 mb-2 mt-2" type="submit" value="Send Message">
+
+
+        </div>
+    </main>
 </body>
 </html>
