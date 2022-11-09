@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body class="bg-secondary bg-gradient bg-opacity-10">
+
+
+    <!-- nav bar -->
+    <nav class="navbar bg-primary bg-gradient bg-opacity-25 p-2 ps-4">
+        <div class="container-fluid">
+            <div class="navbar-brand fw-semibold fs-2 ">Welcome, {{ user.first_name }}</div>
+            <div class="d-flex">
+                <button class="rounded bg-info bg-opacity-50"><a href="/dashboard"  class="text-decoration-none text-dark ">Go Home</a></button>
+                <button class="ms-1 rounded me-2 bg-danger"><a href="/logout" class="text-decoration-none  text-dark">Logout</a></button>
+            </div>
+        </div>
+        <div class="navbar-brand fw-semibold fs-4 ms-5 ">Request a Ride</div>
+    </nav>
+
+    <!-- main wrapper -->
+    <div class="wrapper ">
+
+        <!-- spacer -->
+        <div class="space m-5"></div>
+            
+        <div class="border border-dark rounded ms-5 w-50">
+            <div class="validation ms-5">
+                <!-- validation flash message -->
+                {% with messages = get_flashed_messages(category_filter=["ride"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="text-danger">{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+        
+            <form class="pt-3 pb-3"  action="/ride/creating" method="POST">
+            
+                <div class="container-fluid">
+                    <input type="hidden" name="rider_id" value="{{session['user_id']}}">
+                    <div class="mb-3 d-flex justify-content-between">
+                        <label for="destination">Destination</label>
+                        <textarea name="destination" placeholder="Where to?" cols="25" rows="1" >{{session['destination']}}</textarea>
+                    </div>
+                    <div class="mb-3 d-flex justify-content-between">
+                        <label for="pick_up">Pick-up Location</label>
+                        <textarea name="pick_up" placeholder="Where can we pick you up?" cols="25" rows="1" >{{session['pick_up']}}</textarea>
+                    </div>
+                    <div class="mb-3 d-flex justify-content-between">
+                        <label for="date">Rideshare Date</label>
+                        <input type="date" name="date">
+                    </div>
+                    <div class="mb-1 d-flex justify-content-between">
+                        <label for="details">Details</label>
+                        <textarea name="details" placeholder="Extra details..." cols="25" rows="3">{{session['details']}}</textarea>
+                    </div>
+                    <br>
+                    <div class="d-flex justify-content-end">
+                        <input class="input btn btn-sm bg-success border border-1 border-dark" type="submit" value="Submit">
+                    </div>
+                </div>       
+            </form>
+                
+        </div>
+    </div>
+            
+</body>
+</html>
