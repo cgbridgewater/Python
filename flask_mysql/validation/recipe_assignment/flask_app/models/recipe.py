@@ -1,6 +1,6 @@
 from pprint import pprint
 from flask_app.config.mysqlconnection import connectToMySQL
-from flask import flash
+from flask import flash, session
 from flask_app.models import users
 import datetime
 
@@ -30,6 +30,9 @@ class Recipe:
         except ValueError:
             flash("A date must be provided." , "recipe")
             is_valid = False    # raise ValueError("Incorrect data format, should be YYYY-MM-DD")
+        # if order['creator.id'] is not session['user_id']:
+        #     flash("You did not make this recipe!")
+        #     is_valid = False
         if len(order['name']) < 3: ### Customer Name length check
             flash("Name must be at least 2 characters." , "recipe")
             is_valid = False
@@ -73,26 +76,26 @@ class Recipe:
         SELECT recipes.id, recipes.created_at, recipes.updated_at, instruction, description, name, date_made, under_30,
         users.id as user_id, first_name, last_name, email,password, users.created_at as uc, users.updated_at as uu FROM recipes
         JOIN users ON recipes.user_id = users.id
-        WHERE user_id = %(user_id)s AND recipes.id = %(id)s;
+        WHERE recipes.id = %(id)s;
         '''
         results = connectToMySQL('recipe_schema').query_db(query,data)
         pprint(results)
-        all_recipes = []
-        for row in results:# Create a Tweet class instance from the information from each db row
-            one_recipe = cls(row)# Prepare to make a User class instance, looking at the class in models/user.py
-            one_recipe.creator = users.User( { # Any fields that are used in BOTH tables will have their name changed, which depends on the order you put them in the JOIN query, use a print statement in your classmethod to show this.
-                "id": row['user_id'],
-                "first_name": row['first_name'],
-                "last_name": row['last_name'],
-                "email": row['email'],
-                "password": row['password'],
-                "created_at": row['uc'],
-                "updated_at": row['uu'],
+        # all_recipes = []
+        # for row in results:# Create a Tweet class instance from the information from each db row
+        one_recipe = cls(results[0])# Prepare to make a User class instance, looking at the class in models/user.py
+        one_recipe.creator = users.User( { # Any fields that are used in BOTH tables will have their name changed, which depends on the order you put them in the JOIN query, use a print statement in your classmethod to show this.
+                "id": results[0]['user_id'],
+                "first_name": results[0]['first_name'],
+                "last_name": results[0]['last_name'],
+                "email": results[0]['email'],
+                "password": results[0]['password'],
+                "created_at": results[0]['uc'],
+                "updated_at": results[0]['uu'],
             })
             # author = recipe.Recipe(one_recipes_author_info)### Create the User class instance that's in the user.py model file
             # one_recipe.creator = author ### Associate the Tweet class instance with the User class instance by filling in the empty creator attribute in the Tweet class
-            all_recipes.append(one_recipe) ### Append the Tweet containing the associated User to your list of tweets
-        return all_recipes
+            # all_recipes.append(one_recipe) ### Append the Tweet containing the associated User to your list of tweets
+        return one_recipe
 
 
     ### READ ALL RECIPES PLUS USER (WORKING)

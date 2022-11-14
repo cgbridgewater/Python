@@ -40,14 +40,20 @@ def view_recipe(id,user_id):
 
 
     ## ROUTE TO UPDATE RECIPE FORM BY ID (WORKING)
-@app.route('/recipe/edit/<int:id>')
-def get_one_recipe(id):
+@app.route('/recipe/edit/<int:id>/<int:creator>')
+def get_one_recipe(id,creator):
     if 'user_id' not in session:
         return redirect('/logout')
     data ={
-        'id': id
+        'id': id,
+        'user_id': creator
     }
-    return render_template("edit_recipe.html", recipe = Recipe.get_one_recipe(data))
+    recipe = Recipe.get_one_recipe_and_user(data)
+    if session['user_id'] != recipe.creator.id:
+        return redirect('/logout')
+    return render_template("edit_recipe.html",recipe= recipe)
+
+
 
 
 ### ROUTE TO POST RECIPE UPDATE FORM (WORKING)
@@ -73,5 +79,8 @@ def delete_recipe(id):
     data ={
         'id': id
     }
+    recipe = Recipe.get_one_recipe_and_user(data)
+    if session['user_id'] != recipe.creator.id:
+        return render_template("searching.html")
     Recipe.delete_recipe(data)
     return redirect("/dashboard") 

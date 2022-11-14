@@ -28,11 +28,12 @@ def register():
         "email": request.form['email'],
         "password" : pw_hash
     }
-    user_id = User.save(data) ### save user
+    user_id  = User.save(data) ### save user
     session.pop("first_name", None)  ### clear form place holder sessions
     session.pop("last_name", None)   ### clear form place holder sessions
     session.pop("email", None)       ### clear form place holder sessions
-    session['user_id'] = user_id     ### start user id session to prove logged in
+    session['user_id'] = user_id
+    session['user_first_name'] = request.form['first_name']     ### start user id session to prove logged in
     return redirect("/dashboard")    ### go to dashboard if no validation errors
 
 
@@ -52,7 +53,8 @@ def login():
     if not User.validate_login(request.form):
     # if there are errors:
         return redirect('/') # redirect to the route where the user form is rendered.
-    session["user_id"] = user_in_db.id   ### create session to test logged in
+    session["user_id"] = user_in_db.id
+    session["user_first_name"] = user_in_db.first_name    ### create session to test logged in
     session.pop("email2", None)    ### pop log in session
     return redirect("/dashboard")   ### else no validation errors:
 

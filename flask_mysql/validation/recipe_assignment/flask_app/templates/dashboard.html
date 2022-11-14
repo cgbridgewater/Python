@@ -25,7 +25,7 @@
                 <a href="/recipe/create" class="p-2 border border-2 border-dark rounded bg-success btn-sm text-decoration-none text-light">Create</a>
             </div>
             <div class="col-1">
-                <a href="/dashboard/edit" class="ms-2 p-2 border border-2 border-dark rounded bg-warning btn-sm text-decoration-none text-light">Edit</a>
+                <a href="/dashboard/edit/{{session['user_id']}}" class="ms-2 p-2 border border-2 border-dark rounded bg-warning btn-sm text-decoration-none text-light">Edit</a>
             </div>
             <div class="col-1">
                 <a href="/logout" class="p-2 border border-2 border-dark rounded bg-danger btn-sm text-decoration-none text-light">LogOut</a>
@@ -56,7 +56,7 @@
                         <!-- loop to control 'in session view' -->
                         {% if r.creator.id == session.user_id %}
                         <!-- edit recipe button -->
-                        <button class="bg-primary m-1"><a href="/recipe/edit/{{r.id}}"
+                        <button class="bg-primary m-1"><a href="/recipe/edit/{{r.id}}/{{session['user_id']}}"
                         class="text-decoration-none text-light">Edit</a></button>
                         <!-- delete recipe button -->
                         <button class="bg-danger m-1 me-0"><a href="/recipe/delete/{{r.id}}"

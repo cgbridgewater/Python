@@ -17,8 +17,10 @@ def dashboard():
 
 
     ### ROUTE TO UPDATE USER FORM BY USER_ID (WORKING)
-@app.route('/dashboard/edit/')
-def edit_user():
+@app.route('/dashboard/edit/<int:id>')
+def edit_user(id):
+    if id is not session['user_id']:
+        return render_template("searching.html")    
     if 'user_id' not in session:
         return redirect('/logout')
     data ={
@@ -39,8 +41,9 @@ def update_user():
         "email": request.form["email"]
         }
     if not User.validate_update(data):
-        return redirect('/dashboard/edit/')
+        return redirect(f'/dashboard/edit/{session["user_id"]}')
     User.update_user_by_id(data)
+    return redirect("/dashboard") 
 
 
 ### ROUTE TO DELETE USER BY USER_ID (WORKING)
@@ -53,4 +56,3 @@ def delete_user():
     }
     User.delete_user(data)
     return redirect('/logout') 
-    return redirect("/dashboard") 
