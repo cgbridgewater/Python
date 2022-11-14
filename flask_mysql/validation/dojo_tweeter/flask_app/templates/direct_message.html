@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body class="bg-secondary bg-gradient bg-opacity-50">
+
+    
+    <!-- nav bar -->
+    <nav class="d-flex justify-content-between align-items-center bg-primary bg-gradient bg-opacity-25 p-2">
+        <h2 class="text-center ms-2">Coding Dojo Wall</h2>
+        <p class="text-center mt-3 ms-5">Welcome, {{user.first_name}}!! </p> 
+        <a href="/dashboard/edit" class="btn btn-sm border border-1 text-dark btn-primary">Update</a>
+        <a href="/logout" class="me-5 btn btn-sm border border-1 text-dark btn-warning">LogOut</a>
+    </nav>
+    
+    <!-- break line -->
+    <hr>
+    
+    <!-- main wrapper -->
+    <main class="d-flex justify-content-around">
+
+    <!-- left column -->
+        <div class="col-5 bg-primary bg-opacity-25 rounded border border-1 border-dark">
+            <h2 class="text-center">{{messages|length}} Messages For You</h2>
+            <hr class="border-primary border border-2">
+
+            <!-- message loop -->
+            {% for message in messages %}
+            <div class="card bg-primary bg-gradient bg-opacity-25 m-3 p-2 ">
+                <div class="card-body">
+                    <h3 class="card-title mt-0 mb-0 ">{{message.sender}} said : </h3>
+                    <p class="card-text mt-0 mb-0 ">{{message.content}}</p>
+                    <p>{{message.time_span()}}</p>
+                </div>
+                <div class="card-footer ">
+                    <a class="btn btn-sm btn-danger border border-1 border-dark" href="/delete_message/{{message.id}}">Delete</a>
+                </div>
+            </div> 
+            {% endfor %}
+        </div>
+        
+    <!-- right column -->
+        <div class=" card bg-primary bg-gradient bg-opacity-25 border border-dark">
+            <h2 class="text-center">Send a Message:</h2>
+            <hr class="border-primary border border-2">
+            {% for user in users %}
+                {% if user.id != session.user_id %}
+                <div class="card-body">
+                    <form class="card body bg-primary bg-opacity-25 p-1" action='/post_message' method="POST">
+                        <input type="hidden" name="sender_id" value="{{session.user_id}}">
+                        <input type="hidden" name="receiver_id" value="{{user.id}}">
+                        <label class="card-title fs-3 fw-semibold" for="receiver_id">Message {{user.first_name}}:</label>
+                        <textarea class="form-control-sm border border-primary bg-light bg-opacity-50" name="content" cols="40" rows="2"></textarea>
+                        <input class=" card-footer btn btn-sm btn-primary" type="submit" value="Message">
+                    </form>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </main>
+</body>
+
+</html>
