@@ -2,13 +2,14 @@ from PIL import Image, ImageDraw, ImageFont
 
 import math
 
-chars = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. "[::-1]
+chars = "JUNIPERjuniper"[::-1]
+# chars = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. "[::-1]
 # chars = "#Wo- "[::-1]
 charArray = list(chars)
 charLength = len(charArray)
 interval = charLength/256
 
-scaleFactor = 0.2
+scaleFactor = 0.15
 
 oneCharWidth = 10
 oneCharHeight = 18
@@ -42,9 +43,9 @@ for i in range(height):
         h = int(r/3 + g/3 + b/3)
         pix[j, i] = (h, h, h)
         text_file.write(getChar(h))
-        d.text((j*oneCharWidth, i*oneCharHeight), getChar(h), font = fnt, fill = (r, g, b))
+        d.text((j*oneCharWidth, i*oneCharHeight), getChar(h), font = fnt, fill = (r, g, b))  #color
+        # d.text((j*oneCharWidth, i*oneCharHeight), getChar(h), font = fnt)  #B/W
 
     text_file.write('\n')
 
 outputImage.save('output.png')
-
