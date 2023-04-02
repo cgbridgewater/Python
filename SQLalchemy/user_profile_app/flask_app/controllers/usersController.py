@@ -55,6 +55,7 @@ def update_user():
         "id" : session['user_id'],
         "first_name": request.form["first_name"],
         "last_name": request.form["last_name"],
+        "user_name": request.form["user_name"],
         "email": request.form["email"]
         }
     if not User.validate_update(data):

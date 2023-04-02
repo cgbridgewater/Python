@@ -10,6 +10,7 @@ class User:
         self.id = data['id']
         self.first_name = data['first_name']
         self.last_name = data['last_name']
+        self.user_name = data['user_name']
         self.email = data['email']    
         self.password = data['password']    
         self.created_at = data['created_at']
@@ -24,6 +25,9 @@ class User:
             flash("First Name must be at least 3 characters.", "register")
             is_valid = False
         if len(user['last_name']) < 3: ### last name length check
+            flash("Last Name must be at least 3 characters.", "register")
+            is_valid = False
+        if len(user['user_name']) < 3: ### user name length check
             flash("Last Name must be at least 3 characters.", "register")
             is_valid = False
         if len(user['password']) < 3: ### password length check
@@ -70,6 +74,9 @@ class User:
         if len(user['last_name']) < 3: ### password length check
             flash("Last name must be at least 3 charactors long.", "update")
             is_valid = False
+        if len(user['user_name']) < 3: ### user name length check
+            flash("User Name must be at least 3 characters.", "register")
+            is_valid = False
         if not EMAIL_REGEX.match(user['email']):  ### checks email formating
             flash("Invalid email address!", "update")
             is_valid = False
@@ -92,7 +99,7 @@ class User:
 ### CREATE AND SAVE NEW USER (WORKING)
     @classmethod
     def save(cls,data):
-        query = "INSERT INTO users (first_name, last_name, email, password) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s );"
+        query = "INSERT INTO users (first_name, last_name, user_name, email, password) VALUES (%(first_name)s, %(last_name)s, %(user_name)s, %(email)s, %(password)s );"
         return connectToMySQL('test_app').query_db(query,data)
 
 
@@ -118,7 +125,7 @@ class User:
 ### UPDATE USER BY ID (WORKING)
     @classmethod
     def update_user_by_id(cls,data):
-        query = "UPDATE users SET first_name = %(first_name)s, last_name = %(last_name)s, email = %(email)s WHERE id = %(id)s;"
+        query = "UPDATE users SET first_name = %(first_name)s, last_name = %(last_name)s, user_name = %(user_name)s, email = %(email)s WHERE id = %(id)s;"
         return connectToMySQL('test_app').query_db(query,data)
 
 

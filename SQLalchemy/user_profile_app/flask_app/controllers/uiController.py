@@ -22,6 +22,7 @@ def register():
     if not User.validate_registration(request.form):
         session["first_name"] = request.form["first_name"] ### HOLDING FORM DATA FOR RESUBMIT
         session["last_name"] = request.form["last_name"] ### HOLDING FORM DATA FOR RESUBMIT
+        session["user_name"] = request.form["user_name"] ### HOLDING FORM DATA FOR RESUBMIT
         session["email"] = request.form["email"] ### HOLDING FORM DATA FOR RESUBMIT
         return redirect('/')# redirect to the route where the user form is rendered if there are errors:
     pw_hash = bcrypt.generate_password_hash(request.form['password'])    ### hash password once validations are passed
@@ -29,12 +30,14 @@ def register():
     data = {
         "first_name": request.form['first_name'],
         "last_name" : request.form['last_name'],
+        "user_name" : request.form['user_name'],
         "email": request.form['email'],
         "password" : pw_hash
     }
     user_id = User.save(data) ### save user
     session.pop("first_name", None)  ### clear form place holder sessions
     session.pop("last_name", None)   ### clear form place holder sessions
+    session.pop("user_name", None)   ### clear form place holder sessions
     session.pop("email", None)       ### clear form place holder sessions
     session['user_id'] = user_id     ### start user id session to prove logged in
     return redirect("/dashboard")    ### go to dashboard if no validation errors
