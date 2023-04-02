@@ -16,9 +16,9 @@
     <main>
 
         <!-- nav bar -->
-        <nav class="bg-primary bg-gradient bg-opacity-25">
+        <nav>
             <div>
-                <h1 class="text-center fs-2">{{user.user_name.upper()}}'s profile</h1>
+                <h1 class="nav_title">{{user.user_name.upper()}}'s profile</h1>
             </div>
             <div class="nav_links">
                 <button class="bg-primary m-1"><a href="/dashboard/edit"
@@ -31,111 +31,106 @@
             </div>
         </nav>
 
-        <div class="container">
 
-            <!-- main wrapper -->
-            <div class="wrapper">
-                <!--  Profile Image Container -->
-                <div class="image_box">
-                    <img class="profile_img" src="https://cdn-icons-png.flaticon.com/512/20/20079.png" alt="user icon">
-                </div>
-                
-                <div class="profile_info">
-                    <!--  LEFT BOX CONTAINER  -->
-                    <div class="left_box">
-                        <h3>
-                            Name:
-                        </h3>
-                        <h3>
-                            User Name:
-                        </h3>
-                        <h3>
-                            Email:
-                        </h3>
-                        <h3>
-                            Member Since: 
-                        </h3>
-                    </div>
-                    <!--  RIGHT BOX CONTAINER  -->
-                    <div class="right_box">
-                        <h3>
-                            {{ user.first_name }} {{ user.last_name }}
-                        </h3>
-                        <h3>
-                            {{user.user_name}}
-                        </h3>
-                        <h3>
-                            {{ user.email }}
-                        </h3>
-                        <h3>
-                            {{ user.created_at.strftime("%B %e, %Y %I:%M %p") }}
-                        </h3>
-                    </div>
-            </div>
-        </div>
-    </div>
 
-    <hr class="spacer">
-    
-    <div class="my_activities">
-        <h3>
-            My Events
-        </h3>    
-        <div>
-            <h4>
-                Shit I'm doing
-            </h4>
-            <h4>
-                Other shit I'm doing
-            </h4>
-            <h4>
-                More shit I'm doing
-            </h4>
-        </div>
-    </div>
-
-    <hr class="spacer">
-
-    <div class="friend_zone">
-
-        <div class="friend_left">
-            <div class="flex">
-                <h3>
-                    My Friends
-                </h3>
-                <h3>
-                    <button  class="bg-success m-1"><a href="/dashboard/friends" class="text-decoration-none text-light">Find Friends</a></button>
-                </h3>
-            </div>
-            <div>
-                <ul>
-                    <li>Mike</li>
-                    <li>Tim</li>
-                    <li>John</li>
-                    <li>Ronald</li>
-                    <li>Frank</li>
-                </ul>
-              
-            </div>
-        </div>
+        <!-- main wrapper -->
+        <div class="wrapper">
             
-        <div class="friend_right">
-            <h3>
-                My Friends Events
-            </h3>
-            <div>
+            <!--  Profile Image Container -->
+            <div class="image_box">
+                <img class="profile_img" src="https://cdn-icons-png.flaticon.com/512/20/20079.png" alt="user icon">
+            </div>
+            <!-- End Profile Image Container -->
+
+            <!-- User Data -->
+            <div class="profile_info">  
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td><h4>Name:</h4></td>
+                        <td><h4>{{ user.first_name }} {{ user.last_name }}</h4></td>
+                    </tr>
+                    <tr>
+                        <td><h4>User Name</h4></td>
+                        <td><h4>{{user.user_name}}</h4></td>
+                    </tr>
+                    <tr>
+                        <td><h4>Email:</h4></td>
+                        <td><h4>{{ user.email }}</h4></td>
+                    </tr>
+                    <tr>
+                        <td><h4>Member Since:</h4></td>
+                        <td><h4>{{ user.created_at.strftime("%B %e, %Y %I:%M %p") }}</h4></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>  
+            <!-- End User Data -->
+        </div>
+    </div>
+
+        <hr class="spacer">
+        
+        <div class="my_activities">
+            <button  class="find_friend"><a href="#" class="text-decoration-none text-light">Add Activity</a></button>
+
+            <h4>
+                My Events
+            </h4>    
+            <div class="scrollable">
                 <h5>
-                    -Shit my friends are doing
+                    <a class="link" href="#">Skiing At Mt. Bachelor on April 7th</a>
                 </h5>
                 <h5>
-                    -Other shit my friends are doing
+                    <a class="link" href="#">Hiking Smith Rock on May 7th</a>
                 </h5>
                 <h5>
-                    -More shit my friends are doing
+                    <a class="link" href="#">Mountain Biking at Alsea Falls on June 2nd</a>
                 </h5>
             </div>
         </div>
-    </div>
+
+        <hr class="spacer">
+
+        <div class="friend_zone">
+
+            <div class="friend_left">
+
+                    <div>
+                        <button  class="find_friend"><a href="/dashboard/friends" class="text-decoration-none text-light">Find Friends</a></button>
+                        <h4>
+                            My Friends
+                        </h4>
+                        <div class="scrollable">
+                            <ul>
+                                <li><a class="link" href="#">Mike</a></li>
+                                <li><a class="link" href="#">Tim</a></li>
+                                <li><a class="link" href="#">John</a></li>
+                                <li><a class="link" href="#">Ronald</a></li>
+                                <li><a class="link" href="#">Frank</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+            </div>
+                
+            <div class="friend_right">
+                <h4>
+                    My Friends Events
+                </h4>
+                <div class="scroll">
+                    <h5>
+                        <a class="link" href="#">Mike is going Hiking at Crescent Lake on June 15th</a>
+                    </h5>
+                    <h5>
+                        <a class="link" href="#">Steve is going Mountain Biking at Oakridge on June 17th</a>
+                    </h5>
+                    <h5>
+                        <a class="link" href="#">Mac is going Running at Pre's Trail on June 18th</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
 
     </main>
 </body>

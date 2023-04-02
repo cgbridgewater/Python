@@ -4,7 +4,15 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding:1% 5%;
+    padding:3% 5%;
+    background-image: url(https://vastphotos.com/files/uploads/photos/11267/sedona-panorama-photo-l.jpg?v=20220712073521);
+    background-position: center;
+    background-size:cover ;
+    background-repeat: no-repeat;
+}
+
+.nav_title {
+    color:wheat
 }
 
 .nav_links {
@@ -13,18 +21,25 @@ nav {
 }
 
 main {
-    background-color: gainsboro;
-    height: 100vh;
+    background-color:wheat;
+    min-height: 100vh;
+    height:100%;
     width: 100vw;
 }
 
+.link {
+    text-decoration: none;
+    color:sienna
+}
+
 .wrapper {
-    width: 60%;
-    height: 25vh;
+    width: 70%;
     margin-left: 5%;
+    margin-top: 10px;
     padding: 10px;
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-evenly; */
+    flex-wrap: wrap;
 }
 
 .profile_info {
@@ -34,9 +49,13 @@ main {
     padding:5px;
 }
 
+/* .scrollable {
+    scroll
+} */
+
 .left_box,.right_box {
     min-width: 300px;
-    min-height: 180px;
+    min-height: 170px;
     width: 40%;
 }
 
@@ -45,7 +64,7 @@ main {
 }
 
 .profile_img {
-    height: 150px;
+    height: 200px;
     border: 3px solid black;
     border-radius: 100%;
 }
@@ -55,27 +74,32 @@ main {
     margin:2% auto;
 }
 
-.flex {
+/* .flex {
     display: flex;
-    justify-content: space-between;
-}
+} */
 
 .my_activities {
-    margin-top: 10px;
     padding:0 10%;
 }
 
 .friend_zone {
-    margin-top: 10px;
     padding: 0 10%;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .friend_left {
-    width: 40%;
+    width: 60%;
 }
 
 .friend_right {
-    width: 50%;
+    width: 40%;
+}
+
+.find_friend {
+    background-color: sienna;
+    padding:5px;
+    margin-right: 2%;
+    height: 50px;
 }
