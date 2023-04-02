@@ -43,6 +43,7 @@ main {
 }
 
 .profile_info {
+    min-width: 40%;
     display: flex;
     justify-content: space-between;
     border: 3px solid lightgray;
@@ -60,6 +61,8 @@ main {
 }
 
 .image_box {
+    margin: 0 auto;
+    min-width: 25%;
     padding:2%;
 }
 
@@ -74,9 +77,13 @@ main {
     margin:2% auto;
 }
 
-/* .flex {
+.friend_list {
+    margin:0 auto;
+    padding: 2%;
+    width: 30%;
     display: flex;
-} */
+    justify-content: space-evenly;
+}
 
 .my_activities {
     padding:0 10%;
@@ -100,6 +107,8 @@ main {
 .find_friend {
     background-color: sienna;
     padding:5px;
-    margin-right: 2%;
+    margin-right: 10px;
+    margin-top: 5px;
     height: 50px;
+    width: 125px;
 }
