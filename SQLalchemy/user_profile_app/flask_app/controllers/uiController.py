@@ -10,7 +10,19 @@ bcrypt = Bcrypt(app)
 ### HOME ROUTE
 @app.route('/')
 def index():
+    return redirect("/getoutside/login")
+
+
+### LOGIN ROUTE
+@app.route('/getoutside/login')
+def login_page():
     return render_template("login.html")
+
+
+### LOGIN ROUTE
+@app.route('/getoutside/register')
+def register_page():
+    return render_template("register.html")
 
 
 
