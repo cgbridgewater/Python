@@ -1,0 +1,6 @@
+/* style for index page */
+
+.addForm {
+    display: flex;
+    flex-direction: column;
+}

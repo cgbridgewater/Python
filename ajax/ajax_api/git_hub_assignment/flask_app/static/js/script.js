@@ -6,8 +6,7 @@ CREATE_USER_FORM.addEventListener('submit', (e) => {
     e.preventDefault()
     const current_form = document.querySelector('#create_user_form')
     const form_data = new FormData(current_form)
-    // console.log(document.querySelector('#first_name').value)
-    // console.log(document.last_name.value)
+
     console.log(form_data)
     console.log(current_form)
     fetch('http://localhost:5000/user/create', {method: 'POST', body: new FormData(CREATE_USER_FORM)})
