@@ -48,3 +48,12 @@ def login():
         return redirect('/')
     session['user_id'] = user_in_db.id
     return redirect("/dashboard")
+
+
+
+
+### CATCH ALL DINO GAME  
+@app.route('/', defaults = {'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    return render_template("dinosaur.html")
