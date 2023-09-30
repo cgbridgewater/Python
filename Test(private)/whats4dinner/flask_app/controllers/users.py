@@ -2,7 +2,7 @@ from flask import render_template, redirect, request, session, flash
 from flask_app import app
 from flask_bcrypt import Bcrypt 
 bcrypt = Bcrypt(app)
-from flask_app.models.users import User
+from flask_app.models.user import User
 from flask_app.models.dinner import Dinner
 
 @app.route('/')
@@ -13,6 +13,7 @@ def index():
 def register():
     if not User.validate_user(request.form):
         return redirect('/')
+    print('hello')
     pw_hash = bcrypt.generate_password_hash(request.form['register_password'])
     print(pw_hash)
     data = {
@@ -48,12 +49,3 @@ def login():
         return redirect('/')
     session['user_id'] = user_in_db.id
     return redirect("/dashboard")
-
-
-
-
-### CATCH ALL DINO GAME  
-@app.route('/', defaults = {'path': ''})
-@app.route('/<path:path>')
-def catch_all(path):
-    return render_template("dinosaur.html")

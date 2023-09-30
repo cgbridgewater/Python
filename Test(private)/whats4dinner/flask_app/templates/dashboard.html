@@ -3,26 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index Page</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <title>Document</title>
 </head>
 <body>
-    <h1 class="text-center">Ma, The MeatLoaf!!!</h1>
-    <table class="table table-hover">
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Member Since</th>
-            <th>Last Updated On</th>
-        </tr>
-        <tr>
-            <td>{{ user.username }} {{ user.last_name }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.created_at.strftime("%B %e, %Y") }}</td>
-            <td>{{ user.updated_at.strftime("%B %e, %Y %I:%M %p") }}</td>
-        </tr>
-    </table><!-- Table END -->
+    <h1>Hello {{ user.username }}</h1>
+    <h3>What are we going to eat today?</h3>
+    <a href="/add_dinner">Add A Dinner To The Roulette</button></a>
+    <a href="/get_dinner">Get Tonight's Dinner</a>
 </body>
 </html>

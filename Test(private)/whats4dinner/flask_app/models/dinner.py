@@ -1,9 +1,10 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
-from flask_app.models import users
+from flask_app.models import user
 
 class Dinner:
     def __init__(self, data):
+        self.id = data['id']
         self.name = data['name']
         self.type = data['type']
         self.difficulty = data['difficulty']
@@ -11,7 +12,7 @@ class Dinner:
         self.description = data['description']
         self.ingredients = data['ingredients']
         self.steps = data['steps']
-        self.user_id = data['user_id']
+        self.users_id = data['users_id']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.creator = None
@@ -46,12 +47,11 @@ class Dinner:
         query= """
                 SELECT * FROM dinners
                 LEFT JOIN users
-                ON dinners.user_id = users.id
+                ON dinners.users_id = users.id
                 WHERE dinners.id = %(id)s;
                 """
-        results = connectToMySQL('recipes').query_db(query, data)
+        results = connectToMySQL('wfd').query_db(query, data)
         dinner = cls(results[0])
-        # we don't need to loop because it's only giving us one line of a result, so we can just use results[0]
         dinner_creator = {
                 'id': results[0]['users.id'],
                 'username': results[0]['username'],
@@ -61,21 +61,20 @@ class Dinner:
                 "updated_at": results[0]['users.updated_at']
             }
         dinner.creator = user.User(dinner_creator)
-        # referencing the recipe on line 64
         return dinner
 
     @classmethod
     def save_dinner(cls, data):
         query = """
-                INSERT INTO dinners (name, type, difficulty, price, description, ingredients, steps, user_id) 
-                VALUES (%(name)s, %(type)s, %(difficulty)s, %(price)s, %(description)s, %(ingredients)s, %(steps)s, %(user_id)s);
+                INSERT INTO dinners (name, type, difficulty, price, description, ingredients, steps, users_id) 
+                VALUES (%(name)s, %(type)s, %(difficulty)s, %(price)s, %(description)s, %(ingredients)s, %(steps)s, %(users_id)s);
                 """
         return connectToMySQL('wfd').query_db(query, data)
 
     @classmethod
     def edit_dinner(cls, data):
         query = """
-                UPDATE recipes SET
+                UPDATE dinners SET
                 name=%(name)s, type=%(type)s, difficulty=%(difficulty)s, price=%(price)s, description=%(description)s, ingredients=%(ingredients)s, steps=%(steps)s, 
                 updated_at= NOW() WHERE id = %(id)s;
                 """
@@ -90,7 +89,7 @@ class Dinner:
 
 # ====================================================================
 
-# VALIDATIONS FOR RECIPE CREATION
+# VALIDATIONS FOR DINNER CREATION
     @staticmethod
     def validate_dinner(form_data):
         is_valid = True
